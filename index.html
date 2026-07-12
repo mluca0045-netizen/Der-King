@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Der King – TradingView Strategie</title>
+</head>
+<body>
+<!-- ARTIFACT-CONTENT-START -->
+<style>
+  :root {
+    --bg: #101214;
+    --panel: #191d21;
+    --panel-2: #14171a;
+    --border: #2a2f35;
+    --text: #e9e4d6;
+    --muted: #9aa0a6;
+    --gold: #d9a441;
+    --gold-soft: rgba(217, 164, 65, 0.14);
+    --green: #2ebd85;
+    --red: #e5484d;
+    --code-bg: #0c0e10;
+    --shadow: 0 1px 0 rgba(0,0,0,.4);
+    --display: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f3ec;
+      --panel: #ffffff;
+      --panel-2: #efece3;
+      --border: #ddd8ca;
+      --text: #1c1a15;
+      --muted: #6b6a63;
+      --gold: #a87b1f;
+      --gold-soft: rgba(168, 123, 31, 0.12);
+      --green: #1f9e6e;
+      --red: #c93b44;
+      --code-bg: #16181b;
+      --shadow: 0 1px 2px rgba(60,50,20,.08);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101214; --panel: #191d21; --panel-2: #14171a; --border: #2a2f35;
+    --text: #e9e4d6; --muted: #9aa0a6; --gold: #d9a441;
+    --gold-soft: rgba(217,164,65,.14); --green: #2ebd85; --red: #e5484d;
+    --code-bg: #0c0e10; --shadow: 0 1px 0 rgba(0,0,0,.4);
+  }
+  :root[data-theme="light"] {
+    --bg: #f6f3ec; --panel: #ffffff; --panel-2: #efece3; --border: #ddd8ca;
+    --text: #1c1a15; --muted: #6b6a63; --gold: #a87b1f;
+    --gold-soft: rgba(168,123,31,.12); --green: #1f9e6e; --red: #c93b44;
+    --code-bg: #16181b; --shadow: 0 1px 2px rgba(60,50,20,.08);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------------- Hero ---------------- */
+  .hero {
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .hero canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: .5;
+  }
+  .hero-inner {
+    position: relative;
+    padding: 96px 24px 88px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(52px, 9vw, 96px);
+    line-height: .95;
+    margin: 0 0 18px;
+    letter-spacing: .01em;
+    text-wrap: balance;
+  }
+  h1 .crown {
+    display: block;
+    font-size: .34em;
+    letter-spacing: .32em;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+  }
+  .lede {
+    max-width: 34em;
+    font-size: 18px;
+    color: var(--muted);
+    margin: 0 0 30px;
+  }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    font-family: var(--body);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 11px 22px;
+    border-radius: 4px;
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .btn-gold { background: var(--gold); color: var(--bg); }
+  .btn-gold:hover { filter: brightness(1.08); }
+  .btn-ghost { background: transparent; color: var(--gold); }
+  .btn-ghost:hover { background: var(--gold-soft); }
+  .btn:focus-visible, .copy-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  /* ---------------- Sections ---------------- */
+  section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+  h2 {
+    font-family: var(--display);
+    font-size: 30px;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+  .sub { color: var(--muted); margin: 0 0 32px; max-width: 40em; }
+
+  .rules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 16px;
+  }
+  .rule {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .rule .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .rule h3 { margin: 0; font-size: 17px; font-family: var(--body); }
+  .rule p { margin: 0; font-size: 14px; color: var(--muted); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .table-scroll { overflow-x: auto; border-radius: 6px; }
+  th, td { text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  th {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+    background: var(--panel-2);
+  }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--gold); }
+
+  /* ---------------- Code ---------------- */
+  .codebox {
+    position: relative;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+  .codebox-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .codebox-head .file {
+    font-family: var(--mono); font-size: 13px; color: #9aa0a6;
+  }
+  .copy-btn {
+    font-family: var(--body); font-size: 13px; font-weight: 600;
+    color: #0c0e10;
+    background: #d9a441;
+    border: none; border-radius: 4px;
+    padding: 7px 16px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { filter: brightness(1.08); }
+  .codebox pre {
+    margin: 0;
+    padding: 18px 20px;
+    overflow-x: auto;
+    max-height: 520px;
+    font-family: var(--mono);
+    font-size: 12.8px;
+    line-height: 1.55;
+    color: #d5d9de;
+    tab-size: 4;
+  }
+  .codebox .cm { color: #6e7a86; }
+
+  ol.steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 14px;
+    max-width: 42em;
+  }
+  ol.steps li {
+    position: relative;
+    padding-left: 52px;
+    counter-increment: step;
+  }
+  ol.steps li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 1px;
+    width: 34px; height: 34px;
+    display: grid; place-items: center;
+    font-family: var(--mono); font-size: 14px;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+  }
+  ol.steps code {
+    font-family: var(--mono);
+    font-size: .9em;
+    background: var(--gold-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  .warn {
+    border: 1px solid var(--red);
+    border-left-width: 4px;
+    background: color-mix(in srgb, var(--red) 7%, var(--bg));
+    border-radius: 6px;
+    padding: 18px 22px;
+    max-width: 46em;
+  }
+  .warn strong { color: var(--red); }
+  .warn p { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
+
+  footer {
+    padding: 40px 0 60px;
+    color: var(--muted);
+    font-size: 13.5px;
+    font-family: var(--mono);
+  }
+  footer a { color: var(--gold); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-inner > * { animation: rise .6s ease both; }
+    .hero-inner > *:nth-child(2) { animation-delay: .08s; }
+    .hero-inner > *:nth-child(3) { animation-delay: .16s; }
+    .hero-inner > *:nth-child(4) { animation-delay: .24s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+
+<header class="hero">
+  <canvas id="chart" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="eyebrow">Pine Script v6 · TradingView Strategie</p>
+    <h1><span class="crown">♛ Trend Following</span>Der King</h1>
+    <p class="lede">Eine regelbasierte Trend-Following-Strategie: EMA-Crossover mit Trendfilter, ATR-gesteuertem Risikomanagement und Webhook-Alerts für die Bot-Anbindung.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="#code">Code kopieren</a>
+      <a class="btn btn-ghost" href="#anleitung">Anleitung</a>
+    </div>
+  </div>
+</header>
+
+<section id="regeln">
+  <div class="wrap">
+    <h2>Die Regeln</h2>
+    <p class="sub">Vier Bausteine entscheiden über jeden Trade – kein Bauchgefühl, keine Ausnahmen.</p>
+    <div class="rules">
+      <div class="rule">
+        <span class="tag">Trend</span>
+        <h3>EMA-200-Filter</h3>
+        <p>Longs nur über dem EMA 200, Shorts nur darunter. Es wird nie gegen den übergeordneten Trend gehandelt.</p>
+      </div>
+      <div class="rule">
+        <span class="tag">Einstieg</span>
+        <h3>EMA-Crossover 21/55</h3>
+        <p>Kreuzt der schnelle EMA den langsamen nach oben, entsteht ein Long-Signal – nach unten ein Short-Signal.</p>
+      </div>
+      <div class="rule">
+        <span class="tag">Momentum</span>
+        <h3>RSI-Bestätigung</h3>
+        <p>Ein Long braucht RSI über 50, ein Short RSI unter 50. Schwache Signale werden verworfen.</p>
+      </div>
+      <div class="rule">
+        <span class="tag">Risiko</span>
+        <h3>ATR-Stop &amp; 1&nbsp;%-Regel</h3>
+        <p>Stop-Loss bei 2× ATR, Ziel bei 3× ATR. Die Positionsgröße riskiert pro Trade nur 1&nbsp;% des Kontos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="parameter">
+  <div class="wrap">
+    <h2>Standard-Parameter</h2>
+    <p class="sub">Alle Werte sind in TradingView über die Strategie-Einstellungen (Zahnrad) anpassbar.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Parameter</th><th>Wert</th><th>Zweck</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Schneller EMA</td><td class="num">21</td><td>Signalgeber für den Einstieg</td></tr>
+          <tr><td>Langsamer EMA</td><td class="num">55</td><td>Referenz für das Crossover</td></tr>
+          <tr><td>Trendfilter EMA</td><td class="num">200</td><td>Bestimmt die erlaubte Handelsrichtung</td></tr>
+          <tr><td>RSI-Länge</td><td class="num">14</td><td>Momentum-Bestätigung</td></tr>
+          <tr><td>Stop-Loss</td><td class="num">2,0 × ATR</td><td>Volatilitätsangepasster Verlustbegrenzer</td></tr>
+          <tr><td>Take-Profit</td><td class="num">3,0 × ATR</td><td>Gewinnziel mit positivem Chance-Risiko-Verhältnis</td></tr>
+          <tr><td>Risiko pro Trade</td><td class="num">1,0 %</td><td>Maximaler Kontoanteil, der pro Trade riskiert wird</td></tr>
+          <tr><td>Kommission / Slippage</td><td class="num">0,075 % / 2 Ticks</td><td>Realistische Kosten im Backtest</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap">
+    <h2>Der Code</h2>
+    <p class="sub">Kompletten Code kopieren, in den Pine Editor einfügen, „Zum Chart hinzufügen" klicken.</p>
+    <div class="codebox">
+      <div class="codebox-head">
+        <span class="file">der-king-strategy.pine · Pine Script v6</span>
+        <button class="copy-btn" id="copyBtn" type="button">Code kopieren</button>
+      </div>
+      <pre id="pineCode">//@version=6
+strategy(
+     title                     = "Der King – Trend Strategy",
+     shorttitle                = "DER KING",
+     overlay                   = true,
+     initial_capital           = 10000,
+     default_qty_type          = strategy.percent_of_equity,
+     default_qty_value         = 100,
+     commission_type           = strategy.commission.percent,
+     commission_value          = 0.075,
+     slippage                  = 2,
+     pyramiding                = 0,
+     calc_on_every_tick        = false,
+     process_orders_on_close   = true)
+
+<span class="cm">// ------------------------------------------------------------------ Inputs --</span>
+grpTrend  = "Trend &amp; Einstieg"
+emaFastLen  = input.int(21,  "Schneller EMA",            minval = 1,  group = grpTrend)
+emaSlowLen  = input.int(55,  "Langsamer EMA",            minval = 2,  group = grpTrend)
+emaTrendLen = input.int(200, "Trendfilter EMA",          minval = 10, group = grpTrend)
+useTrendFlt = input.bool(true, "Trendfilter aktivieren", group = grpTrend)
+
+grpRsi    = "RSI-Filter"
+useRsi    = input.bool(true, "RSI-Filter aktivieren",    group = grpRsi)
+rsiLen    = input.int(14, "RSI Länge",                   minval = 2,  group = grpRsi)
+rsiLongMin  = input.int(50, "RSI Minimum für Long",      minval = 0, maxval = 100, group = grpRsi)
+rsiShortMax = input.int(50, "RSI Maximum für Short",     minval = 0, maxval = 100, group = grpRsi)
+
+grpRisk   = "Risikomanagement"
+atrLen    = input.int(14,    "ATR Länge",                minval = 1,   group = grpRisk)
+slAtrMult = input.float(2.0, "Stop-Loss (ATR ×)",        minval = 0.1, step = 0.1, group = grpRisk)
+tpAtrMult = input.float(3.0, "Take-Profit (ATR ×)",      minval = 0.1, step = 0.1, group = grpRisk)
+useTrail  = input.bool(false, "Trailing-Stop statt festem TP", group = grpRisk)
+trailMult = input.float(2.5, "Trailing-Abstand (ATR ×)", minval = 0.1, step = 0.1, group = grpRisk)
+riskPct   = input.float(1.0, "Risiko pro Trade (% Konto)", minval = 0.1, maxval = 10, step = 0.1, group = grpRisk)
+
+grpDir    = "Handelsrichtung"
+allowLong  = input.bool(true, "Longs erlauben",  group = grpDir)
+allowShort = input.bool(true, "Shorts erlauben", group = grpDir)
+
+grpTime   = "Backtest-Zeitraum"
+startDate = input.time(timestamp("1 Jan 2020"), "Start", group = grpTime)
+endDate   = input.time(timestamp("1 Jan 2030"), "Ende",  group = grpTime)
+inWindow  = time &gt;= startDate and time &lt;= endDate
+
+<span class="cm">// -------------------------------------------------------------- Indikatoren --</span>
+emaFast  = ta.ema(close, emaFastLen)
+emaSlow  = ta.ema(close, emaSlowLen)
+emaTrend = ta.ema(close, emaTrendLen)
+rsiVal   = ta.rsi(close, rsiLen)
+atrVal   = ta.atr(atrLen)
+
+<span class="cm">// ------------------------------------------------------------------- Logik --</span>
+bullTrend = not useTrendFlt or close &gt; emaTrend
+bearTrend = not useTrendFlt or close &lt; emaTrend
+
+rsiLongOk  = not useRsi or rsiVal &gt; rsiLongMin
+rsiShortOk = not useRsi or rsiVal &lt; rsiShortMax
+
+longSignal  = ta.crossover(emaFast, emaSlow)  and bullTrend and rsiLongOk  and allowLong  and inWindow
+shortSignal = ta.crossunder(emaFast, emaSlow) and bearTrend and rsiShortOk and allowShort and inWindow
+
+<span class="cm">// Positionsgröße: riskPct % des Kontos geteilt durch Stop-Abstand</span>
+slDistance = atrVal * slAtrMult
+riskCapital = strategy.equity * riskPct / 100.0
+qty = slDistance &gt; 0 ? riskCapital / slDistance : na
+
+<span class="cm">// ------------------------------------------------------------------ Orders --</span>
+if longSignal and strategy.position_size &lt;= 0
+    strategy.entry("Long", strategy.long, qty = qty,
+         alert_message = '{"action":"buy","symbol":"' + syminfo.ticker + '","price":' + str.tostring(close) + '}')
+
+if shortSignal and strategy.position_size &gt;= 0
+    strategy.entry("Short", strategy.short, qty = qty,
+         alert_message = '{"action":"sell","symbol":"' + syminfo.ticker + '","price":' + str.tostring(close) + '}')
+
+<span class="cm">// Stop-Loss / Take-Profit / Trailing</span>
+if strategy.position_size &gt; 0
+    slPrice = strategy.position_avg_price - slDistance
+    tpPrice = strategy.position_avg_price + atrVal * tpAtrMult
+    if useTrail
+        strategy.exit("Long Exit", "Long", stop = slPrice,
+             trail_points = trailMult * atrVal / syminfo.mintick * syminfo.mintick,
+             trail_offset = trailMult * atrVal / syminfo.mintick,
+             alert_message = '{"action":"close","symbol":"' + syminfo.ticker + '"}')
+    else
+        strategy.exit("Long Exit", "Long", stop = slPrice, limit = tpPrice,
+             alert_message = '{"action":"close","symbol":"' + syminfo.ticker + '"}')
+
+if strategy.position_size &lt; 0
+    slPriceS = strategy.position_avg_price + slDistance
+    tpPriceS = strategy.position_avg_price - atrVal * tpAtrMult
+    if useTrail
+        strategy.exit("Short Exit", "Short", stop = slPriceS,
+             trail_points = trailMult * atrVal / syminfo.mintick * syminfo.mintick,
+             trail_offset = trailMult * atrVal / syminfo.mintick,
+             alert_message = '{"action":"close","symbol":"' + syminfo.ticker + '"}')
+    else
+        strategy.exit("Short Exit", "Short", stop = slPriceS, limit = tpPriceS,
+             alert_message = '{"action":"close","symbol":"' + syminfo.ticker + '"}')
+
+<span class="cm">// ------------------------------------------------------------------- Plots --</span>
+plot(emaFast,  "EMA schnell", color = color.new(color.aqua,   0), linewidth = 1)
+plot(emaSlow,  "EMA langsam", color = color.new(color.orange, 0), linewidth = 1)
+plot(emaTrend, "EMA Trend",   color = close &gt; emaTrend ? color.new(color.green, 40) : color.new(color.red, 40), linewidth = 2)
+
+plotshape(longSignal,  "Long Signal",  shape.triangleup,   location.belowbar, color.green, size = size.small)
+plotshape(shortSignal, "Short Signal", shape.triangledown, location.abovebar, color.red,   size = size.small)
+
+bgcolor(strategy.position_size &gt; 0 ? color.new(color.green, 92) : strategy.position_size &lt; 0 ? color.new(color.red, 92) : na)</pre>
+    </div>
+  </div>
+</section>
+
+<section id="anleitung">
+  <div class="wrap">
+    <h2>In 5 Schritten zum laufenden Bot</h2>
+    <p class="sub">Vom Chart bis zur automatischen Order-Ausführung per Webhook.</p>
+    <ol class="steps">
+      <li><strong>Chart öffnen.</strong> Auf TradingView einen liquiden Markt wählen – z.&nbsp;B. BTC/USDT oder ETH/USDT im 1H- oder 4H-Timeframe.</li>
+      <li><strong>Code einfügen.</strong> Den Pine Editor unten im Chart öffnen, den kompletten Code einfügen und auf <code>Zum Chart hinzufügen</code> klicken.</li>
+      <li><strong>Backtest prüfen.</strong> Im Strategie-Tester Nettogewinn, maximalen Drawdown, Trefferquote und Profitfaktor kontrollieren – und die Parameter für den eigenen Markt optimieren.</li>
+      <li><strong>Alert anlegen.</strong> Einen Alert auf die Strategie mit der Bedingung <code>Order fills only</code> erstellen und als Nachricht <code>{{strategy.order.alert_message}}</code> eintragen.</li>
+      <li><strong>Webhook verbinden.</strong> Die Webhook-URL des Bot-Dienstes (z.&nbsp;B. 3Commas, Alertatron oder ein eigener Server) hinterlegen – die Strategie sendet fertige JSON-Signale wie <code>{"action":"buy","symbol":"BTCUSDT"}</code>.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="risiko">
+  <div class="wrap">
+    <div class="warn">
+      <strong>Risikohinweis</strong>
+      <p>Keine Strategie ist garantiert profitabel. Backtest-Ergebnisse sind keine Garantie für zukünftige Gewinne. Teste ausgiebig im Strategie-Tester und per Paper-Trading, bevor echtes Geld im Spiel ist – und riskiere nie Geld, dessen Verlust du dir nicht leisten kannst.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    DER KING · Pine Script v6 · <a href="https://github.com/mluca0045-netizen/Der-King" rel="noopener">Quellcode auf GitHub</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // --- Copy-Button ---
+  var btn = document.getElementById('copyBtn');
+  var pre = document.getElementById('pineCode');
+  btn.addEventListener('click', function () {
+    var text = pre.textContent;
+    function done() {
+      var old = btn.textContent;
+      btn.textContent = 'Kopiert!';
+      btn.disabled = true;
+      setTimeout(function () { btn.textContent = old; btn.disabled = false; }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  });
+
+  // --- Hero-Chart: Candles + EMA-Linien (deterministischer Random Walk) ---
+  var canvas = document.getElementById('chart');
+  var ctx = canvas.getContext('2d');
+
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function genCandles(n) {
+    var rnd = mulberry32(1337);
+    var candles = [];
+    var price = 100;
+    for (var i = 0; i < n; i++) {
+      var drift = Math.sin(i / 22) * 0.5 + 0.12;
+      var vol = 1.1 + rnd() * 1.4;
+      var open = price;
+      var close = open + (rnd() - 0.5 + drift * 0.35) * vol;
+      var high = Math.max(open, close) + rnd() * vol * 0.6;
+      var low = Math.min(open, close) - rnd() * vol * 0.6;
+      candles.push({ o: open, h: high, l: low, c: close });
+      price = close;
+    }
+    return candles;
+  }
+
+  function ema(values, len) {
+    var k = 2 / (len + 1), out = [], prev = values[0];
+    for (var i = 0; i < values.length; i++) {
+      prev = i === 0 ? values[0] : values[i] * k + prev * (1 - k);
+      out.push(prev);
+    }
+    return out;
+  }
+
+  var candles = genCandles(150);
+  var closes = candles.map(function (c) { return c.c; });
+  var emaF = ema(closes, 21);
+  var emaS = ema(closes, 55);
+
+  function cssVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  function draw() {
+    var host = canvas.parentElement;
+    var dpr = window.devicePixelRatio || 1;
+    var w = host.clientWidth, h = host.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+
+    var green = cssVar('--green'), red = cssVar('--red'), gold = cssVar('--gold');
+    var min = Infinity, max = -Infinity;
+    candles.forEach(function (c) { min = Math.min(min, c.l); max = Math.max(max, c.h); });
+    var pad = (max - min) * 0.12; min -= pad; max += pad;
+
+    var n = candles.length;
+    var step = w / n;
+    var bw = Math.max(2, step * 0.55);
+    function y(v) { return h - ((v - min) / (max - min)) * h; }
+
+    candles.forEach(function (c, i) {
+      var x = i * step + step / 2;
+      var up = c.c >= c.o;
+      ctx.strokeStyle = ctx.fillStyle = up ? green : red;
+      ctx.globalAlpha = 0.55;
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x, y(c.h)); ctx.lineTo(x, y(c.l)); ctx.stroke();
+      var top = y(Math.max(c.o, c.c)), bot = y(Math.min(c.o, c.c));
+      ctx.fillRect(x - bw / 2, top, bw, Math.max(1, bot - top));
+    });
+
+    ctx.globalAlpha = 0.9;
+    [[emaF, gold, 1.6], [emaS, cssVar('--muted'), 1.2]].forEach(function (spec) {
+      ctx.strokeStyle = spec[1];
+      ctx.lineWidth = spec[2];
+      ctx.beginPath();
+      spec[0].forEach(function (v, i) {
+        var x = i * step + step / 2;
+        i === 0 ? ctx.moveTo(x, y(v)) : ctx.lineTo(x, y(v));
+      });
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  draw();
+  window.addEventListener('resize', draw);
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+  }
+  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+})();
+</script>
+<!-- ARTIFACT-CONTENT-END -->
+</body>
+</html>
