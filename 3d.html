@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Der King – 3D-Figur</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+    "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js",
+    "three/addons/exporters/OBJExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js",
+    "three/addons/exporters/GLTFExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT",
+    "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ"
+  }
+}
+</script>
+<style>
+  html, body { margin: 0; height: 100%; }
+  three-d-stage:not(:defined) { visibility: hidden; }
+  .overlay {
+    position: absolute;
+    top: 24px; left: 28px;
+    z-index: 2;
+    pointer-events: none;
+    color: #1c1a15;
+  }
+  .overlay .eyebrow {
+    margin: 0 0 6px;
+    font: 600 11px/1 ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #a87b1f;
+  }
+  .overlay h1 {
+    margin: 0;
+    font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    font-size: clamp(26px, 4vw, 40px);
+    line-height: 1.05;
+  }
+  .overlay p.hint {
+    margin: 8px 0 0;
+    font: 400 13px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: rgba(28, 26, 21, .6);
+    max-width: 34em;
+  }
+  .overlay a {
+    pointer-events: auto;
+    color: #a87b1f;
+  }
+</style>
+</head>
+<body>
+<div class="overlay">
+  <p class="eyebrow">Der King · Pine Script Strategie</p>
+  <h1>♛ Die Figur zum Bot</h1>
+  <p class="hint">Ziehen zum Drehen, Scrollen zum Zoomen. Unten rechts als OBJ + MTL oder GLB herunterladen. <a href="index.html">Zurück zur Strategie</a></p>
+</div>
+
+<three-d-stage name="der-king" autorotate></three-d-stage>
+
+<script src="three-d-stage.js"></script>
+<script type="module">
+  const stage = document.querySelector('three-d-stage');
+  const { THREE } = await stage.ready;
+
+  // Materialien: Metalness gedeckelt (~0.35), Metall-Look über hellere
+  // Grundfarbe — die Bühne hat kein Environment-Map (siehe Usage-Notes).
+  const gold = new THREE.MeshStandardMaterial({ color: 0xdfae52, metalness: 0.35, roughness: 0.32 });
+  gold.name = 'gold';
+  const ebony = new THREE.MeshStandardMaterial({ color: 0x2b2622, metalness: 0.15, roughness: 0.55 });
+  ebony.name = 'ebenholz';
+
+  // Schachkönig als Drehkörper, Maße in Metern (Figur ≈ 13 cm hoch), y-up.
+  const profile = [
+    [0.000, 0.000],
+    [0.032, 0.000],
+    [0.032, 0.010],
+    [0.026, 0.016],
+    [0.028, 0.022],
+    [0.020, 0.032],
+    [0.013, 0.050],
+    [0.011, 0.062],
+    [0.015, 0.070],
+    [0.011, 0.074],
+    [0.019, 0.086],
+    [0.021, 0.094],
+    [0.013, 0.100],
+    [0.009, 0.103],
+    [0.000, 0.106],
+  ].map((p) => new THREE.Vector2(p[0], p[1]));
+
+  const body = new THREE.Mesh(new THREE.LatheGeometry(profile, 96), gold);
+  body.name = 'korpus';
+
+  const collar = new THREE.Mesh(new THREE.TorusGeometry(0.0135, 0.0028, 20, 64), ebony);
+  collar.rotation.x = Math.PI / 2;
+  collar.position.y = 0.070;
+  collar.name = 'kragen';
+
+  const crossV = new THREE.Mesh(new THREE.BoxGeometry(0.006, 0.026, 0.006), gold);
+  crossV.position.y = 0.118;
+  crossV.name = 'kreuz_vertikal';
+
+  const crossH = new THREE.Mesh(new THREE.BoxGeometry(0.018, 0.006, 0.006), gold);
+  crossH.position.y = 0.121;
+  crossH.name = 'kreuz_quer';
+
+  const model = new THREE.Group();
+  model.name = 'der_king';
+  model.add(body, collar, crossV, crossH);
+
+  stage.setObject(model);
+</script>
+</body>
+</html>

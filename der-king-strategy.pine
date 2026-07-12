@@ -1,0 +1,126 @@
+//@version=6
+// =============================================================================
+//  DER KING – Trend-Following Strategie für TradingView
+// =============================================================================
+//  Konzept:
+//    - Trendfilter über EMA 200 (nur Longs im Aufwärtstrend, Shorts im Abwärtstrend)
+//    - Einstieg über EMA-Crossover (schnell/langsam) mit RSI-Momentum-Filter
+//    - ATR-basierter Stop-Loss und Take-Profit (passt sich der Volatilität an)
+//    - Optionaler Trailing-Stop
+//    - Positionsgröße nach Risiko in % des Kontos
+//    - Alert-Nachrichten für Webhook-Anbindung (z. B. an einen Broker-Bot)
+//
+//  WICHTIG: Keine Strategie ist garantiert profitabel. Vor Live-Einsatz
+//  unbedingt im Strategie-Tester backtesten und Parameter je Markt/Timeframe
+//  optimieren. Empfohlen: 1H–4H Charts auf liquiden Märkten (BTC, ETH, Indizes).
+// =============================================================================
+
+strategy(
+     title                     = "Der King – Trend Strategy",
+     shorttitle                = "DER KING",
+     overlay                   = true,
+     initial_capital           = 10000,
+     default_qty_type          = strategy.percent_of_equity,
+     default_qty_value         = 100,
+     commission_type           = strategy.commission.percent,
+     commission_value          = 0.075,
+     slippage                  = 2,
+     pyramiding                = 0,
+     calc_on_every_tick        = false,
+     process_orders_on_close   = true)
+
+// ------------------------------------------------------------------ Inputs --
+grpTrend  = "Trend & Einstieg"
+emaFastLen  = input.int(21,  "Schneller EMA",            minval = 1,  group = grpTrend)
+emaSlowLen  = input.int(55,  "Langsamer EMA",            minval = 2,  group = grpTrend)
+emaTrendLen = input.int(200, "Trendfilter EMA",          minval = 10, group = grpTrend)
+useTrendFlt = input.bool(true, "Trendfilter aktivieren", group = grpTrend)
+
+grpRsi    = "RSI-Filter"
+useRsi    = input.bool(true, "RSI-Filter aktivieren",    group = grpRsi)
+rsiLen    = input.int(14, "RSI Länge",                   minval = 2,  group = grpRsi)
+rsiLongMin  = input.int(50, "RSI Minimum für Long",      minval = 0, maxval = 100, group = grpRsi)
+rsiShortMax = input.int(50, "RSI Maximum für Short",     minval = 0, maxval = 100, group = grpRsi)
+
+grpRisk   = "Risikomanagement"
+atrLen    = input.int(14,    "ATR Länge",                minval = 1,   group = grpRisk)
+slAtrMult = input.float(2.0, "Stop-Loss (ATR ×)",        minval = 0.1, step = 0.1, group = grpRisk)
+tpAtrMult = input.float(3.0, "Take-Profit (ATR ×)",      minval = 0.1, step = 0.1, group = grpRisk)
+useTrail  = input.bool(false, "Trailing-Stop statt festem TP", group = grpRisk)
+trailMult = input.float(2.5, "Trailing-Abstand (ATR ×)", minval = 0.1, step = 0.1, group = grpRisk)
+riskPct   = input.float(1.0, "Risiko pro Trade (% Konto)", minval = 0.1, maxval = 10, step = 0.1, group = grpRisk)
+
+grpDir    = "Handelsrichtung"
+allowLong  = input.bool(true, "Longs erlauben",  group = grpDir)
+allowShort = input.bool(true, "Shorts erlauben", group = grpDir)
+
+grpTime   = "Backtest-Zeitraum"
+startDate = input.time(timestamp("1 Jan 2020"), "Start", group = grpTime)
+endDate   = input.time(timestamp("1 Jan 2030"), "Ende",  group = grpTime)
+inWindow  = time >= startDate and time <= endDate
+
+// -------------------------------------------------------------- Indikatoren --
+emaFast  = ta.ema(close, emaFastLen)
+emaSlow  = ta.ema(close, emaSlowLen)
+emaTrend = ta.ema(close, emaTrendLen)
+rsiVal   = ta.rsi(close, rsiLen)
+atrVal   = ta.atr(atrLen)
+
+// ------------------------------------------------------------------- Logik --
+bullTrend = not useTrendFlt or close > emaTrend
+bearTrend = not useTrendFlt or close < emaTrend
+
+rsiLongOk  = not useRsi or rsiVal > rsiLongMin
+rsiShortOk = not useRsi or rsiVal < rsiShortMax
+
+longSignal  = ta.crossover(emaFast, emaSlow)  and bullTrend and rsiLongOk  and allowLong  and inWindow
+shortSignal = ta.crossunder(emaFast, emaSlow) and bearTrend and rsiShortOk and allowShort and inWindow
+
+// Positionsgröße: riskPct % des Kontos geteilt durch Stop-Abstand
+slDistance = atrVal * slAtrMult
+riskCapital = strategy.equity * riskPct / 100.0
+qty = slDistance > 0 ? riskCapital / slDistance : na
+
+// ------------------------------------------------------------------ Orders --
+if longSignal and strategy.position_size <= 0
+    strategy.entry("Long", strategy.long, qty = qty,
+         alert_message = '{"action":"buy","symbol":"' + syminfo.ticker + '","price":' + str.tostring(close) + '}')
+
+if shortSignal and strategy.position_size >= 0
+    strategy.entry("Short", strategy.short, qty = qty,
+         alert_message = '{"action":"sell","symbol":"' + syminfo.ticker + '","price":' + str.tostring(close) + '}')
+
+// Stop-Loss / Take-Profit / Trailing
+if strategy.position_size > 0
+    slPrice = strategy.position_avg_price - slDistance
+    tpPrice = strategy.position_avg_price + atrVal * tpAtrMult
+    if useTrail
+        strategy.exit("Long Exit", "Long", stop = slPrice,
+             trail_points = trailMult * atrVal / syminfo.mintick * syminfo.mintick,
+             trail_offset = trailMult * atrVal / syminfo.mintick,
+             alert_message = '{"action":"close","symbol":"' + syminfo.ticker + '"}')
+    else
+        strategy.exit("Long Exit", "Long", stop = slPrice, limit = tpPrice,
+             alert_message = '{"action":"close","symbol":"' + syminfo.ticker + '"}')
+
+if strategy.position_size < 0
+    slPriceS = strategy.position_avg_price + slDistance
+    tpPriceS = strategy.position_avg_price - atrVal * tpAtrMult
+    if useTrail
+        strategy.exit("Short Exit", "Short", stop = slPriceS,
+             trail_points = trailMult * atrVal / syminfo.mintick * syminfo.mintick,
+             trail_offset = trailMult * atrVal / syminfo.mintick,
+             alert_message = '{"action":"close","symbol":"' + syminfo.ticker + '"}')
+    else
+        strategy.exit("Short Exit", "Short", stop = slPriceS, limit = tpPriceS,
+             alert_message = '{"action":"close","symbol":"' + syminfo.ticker + '"}')
+
+// ------------------------------------------------------------------- Plots --
+plot(emaFast,  "EMA schnell", color = color.new(color.aqua,   0), linewidth = 1)
+plot(emaSlow,  "EMA langsam", color = color.new(color.orange, 0), linewidth = 1)
+plot(emaTrend, "EMA Trend",   color = close > emaTrend ? color.new(color.green, 40) : color.new(color.red, 40), linewidth = 2)
+
+plotshape(longSignal,  "Long Signal",  shape.triangleup,   location.belowbar, color.green, size = size.small)
+plotshape(shortSignal, "Short Signal", shape.triangledown, location.abovebar, color.red,   size = size.small)
+
+bgcolor(strategy.position_size > 0 ? color.new(color.green, 92) : strategy.position_size < 0 ? color.new(color.red, 92) : na)
