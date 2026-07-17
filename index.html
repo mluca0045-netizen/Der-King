@@ -688,6 +688,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
   #btnGas{background:var(--gas);box-shadow:0 0 14px rgba(74,198,255,.25);}
   #btnReset{background:#33445e;color:var(--text);}
   label.toggle{display:inline-flex;align-items:center;gap:5px;font-size:0.82rem;color:var(--muted);cursor:pointer;}
+  .modeToggle{display:inline-flex;border:1px solid var(--panel-border);border-radius:8px;overflow:hidden;}
+  .modeBtn{background:#1a2230;color:var(--muted);border-radius:0;padding:8px 12px;font-size:0.8rem;box-shadow:none;}
+  .modeBtn.active{background:#33445e;color:var(--text);}
+  .modeBtn:hover:not(:disabled){transform:none;}
   .status{margin-left:auto;font-size:0.83rem;color:var(--muted);font-variant-numeric:tabular-nums;}
   #map{flex:1;min-height:320px;cursor:crosshair;}
   .leaflet-container{background:#0b0f14;}
@@ -721,9 +725,13 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <body>
 <header>
   <h1>Seeheim-Jugenheim → Frankfurt: Strom- &amp; Gas-Lieferroute</h1>
-  <p>Konkrete Route entlang echter Straßen (OSRM/OpenStreetMap) über reale Stationen: Umspannanlage Pfungstadt und Umspannwerk Hochstraße (Mainova) für Strom, Gas-Übernahmestation Schuldorf (Seeheim) und Erdgasregelanlage Frankfurt (Mainova) für Gas. „Strom starten"/„Gas starten" zeigt die Fahrt von Start bis Ziel mit realer Übertragungszeit (ms bzw. h). Das komplette deutsche Netz (alle Spannungsebenen) bleibt als Hintergrund sichtbar und anklickbar.</p>
+  <p>Zwei Modi: <strong>Lieferroute</strong> (Seeheim-Jugenheim → Frankfurt entlang echter Straßen über Umspannanlage Pfungstadt/Umspannwerk Hochstraße bzw. Gas-Übernahmestation Schuldorf/Erdgasregelanlage Frankfurt, alle Mainova/ENTEGA-Angaben recherchiert) oder <strong>Gesamtnetz Deutschland</strong> (Wellenfront über das komplette deutsche Strom-/Gasnetz, alle Spannungsebenen bzw. alle erfassten Leitungen, ab Einspeisepunkt Seeheim-Jugenheim). „Strom/Gas starten" animiert je nach gewähltem Modus.</p>
 </header>
 <div class="controls">
+  <div class="modeToggle">
+    <button id="modeRoute" class="modeBtn">Lieferroute</button>
+    <button id="modeNet" class="modeBtn">Gesamtnetz DE</button>
+  </div>
   <button id="btnStrom">⚡ Strom starten</button>
   <button id="btnGas">🔥 Gas starten</button>
   <button id="btnReset">Zurücksetzen</button>
@@ -761,6 +769,9 @@ const ROUTE_POWER_D=[[49.76326,8.65604],[49.76326,8.65604],[49.76331,8.65592],[4
 const ROUTE_GAS_D=[[49.75975,8.633],[49.75992,8.63273],[49.7601,8.63245],[49.75997,8.63204],[49.75995,8.63197],[49.75992,8.6319],[49.76187,8.63026],[49.76243,8.62978],[49.763,8.62927],[49.76315,8.62913],[49.76371,8.62856],[49.76409,8.62815],[49.76454,8.62762],[49.76556,8.62643],[49.76611,8.62588],[49.76664,8.62536],[49.76684,8.6252],[49.76704,8.62506],[49.76765,8.62475],[49.76773,8.6247],[49.7678,8.62464],[49.76786,8.62459],[49.76791,8.62455],[49.76803,8.62443],[49.76811,8.62434],[49.7682,8.62419],[49.76827,8.62395],[49.76834,8.62373],[49.76846,8.62334],[49.76851,8.62318],[49.76855,8.62309],[49.76861,8.62293],[49.76866,8.62284],[49.76876,8.62272],[49.76881,8.62266],[49.7689,8.62258],[49.76902,8.62248],[49.76916,8.62238],[49.76937,8.62225],[49.76949,8.62217],[49.76963,8.62207],[49.76972,8.62199],[49.76995,8.62178],[49.77018,8.62153],[49.77044,8.62121],[49.77076,8.62078],[49.77228,8.61871],[49.7729,8.61787],[49.77316,8.61751],[49.77414,8.61617],[49.77452,8.61564],[49.77459,8.61554],[49.77479,8.61528],[49.77486,8.61524],[49.77493,8.61521],[49.77499,8.61519],[49.77505,8.61519],[49.77509,8.61518],[49.77515,8.6152],[49.7752,8.61521],[49.77526,8.61524],[49.77543,8.61546],[49.77557,8.61563],[49.77562,8.61568],[49.7757,8.61575],[49.77576,8.6158],[49.77583,8.61583],[49.7759,8.61587],[49.77597,8.61589],[49.77603,8.6159],[49.7761,8.61592],[49.77616,8.61592],[49.77623,8.61592],[49.77629,8.61591],[49.77634,8.61589],[49.7764,8.61586],[49.77647,8.61582],[49.77656,8.61576],[49.77664,8.61569],[49.77678,8.61557],[49.77684,8.61552],[49.7769,8.61548],[49.77696,8.61544],[49.77703,8.61542],[49.7771,8.6154],[49.77716,8.61539],[49.77723,8.61539],[49.7773,8.6154],[49.77737,8.61541],[49.77743,8.61544],[49.7775,8.61547],[49.77773,8.61556],[49.77831,8.61591],[49.77903,8.61628],[49.77968,8.61659],[49.78005,8.61676],[49.78055,8.61694],[49.78137,8.61721],[49.78221,8.61745],[49.78322,8.61768],[49.7843,8.61789],[49.78522,8.61804],[49.7861,8.61818],[49.78722,8.61834],[49.7883,8.61851],[49.78945,8.6187],[49.79044,8.61889],[49.79102,8.61902],[49.79164,8.61917],[49.79239,8.61938],[49.79324,8.61967],[49.79366,8.61982],[49.79409,8.62001],[49.79456,8.6202],[49.79521,8.62051],[49.79585,8.62084],[49.79651,8.6212],[49.79726,8.62164],[49.798,8.62213],[49.79854,8.6225],[49.79916,8.62294],[49.79986,8.62345],[49.80045,8.62388],[49.80103,8.62432],[49.80231,8.62526],[49.80377,8.62627],[49.8044,8.62667],[49.80498,8.62701],[49.80534,8.62721],[49.80573,8.62741],[49.80654,8.62781],[49.80687,8.62795],[49.80731,8.62812],[49.80775,8.62827],[49.80819,8.62841],[49.80863,8.62853],[49.80908,8.62863],[49.80958,8.62872],[49.81007,8.62879],[49.81057,8.62884],[49.8109,8.62887],[49.81128,8.62889],[49.81149,8.62889],[49.81217,8.62886],[49.81275,8.62884],[49.8135,8.6288],[49.81368,8.62879],[49.81439,8.62874],[49.81476,8.62872],[49.81523,8.62872],[49.81545,8.62871],[49.81595,8.62871],[49.81629,8.62872],[49.81667,8.62873],[49.81675,8.62874],[49.81696,8.62875],[49.81747,8.62881],[49.81807,8.62891],[49.81839,8.62898],[49.81871,8.62905],[49.81923,8.62919],[49.81971,8.62934],[49.82,8.62944],[49.8202,8.62951],[49.82066,8.6297],[49.82124,8.62996],[49.82153,8.63011],[49.82192,8.63031],[49.82231,8.63053],[49.8228,8.63082],[49.8234,8.6312],[49.82389,8.63151],[49.8244,8.63184],[49.825,8.63222],[49.82529,8.6324],[49.82583,8.63273],[49.8259,8.63277],[49.82617,8.63293],[49.82645,8.63308],[49.82671,8.63322],[49.82697,8.63335],[49.82717,8.63345],[49.82743,8.63357],[49.82764,8.63365],[49.8279,8.63376],[49.82811,8.63384],[49.82837,8.63393],[49.82858,8.63399],[49.82885,8.63407],[49.82909,8.63413],[49.8294,8.6342],[49.82977,8.63427],[49.83002,8.6343],[49.8303,8.63433],[49.83054,8.63435],[49.83079,8.63436],[49.83106,8.63437],[49.83129,8.63437],[49.83175,8.63434],[49.83258,8.63424],[49.83302,8.63418],[49.83341,8.63408],[49.83367,8.63401],[49.83384,8.63396],[49.83409,8.63387],[49.83438,8.63377],[49.83482,8.63359],[49.83512,8.63345],[49.83549,8.63327],[49.83569,8.63316],[49.83589,8.63305],[49.83616,8.63289],[49.83649,8.63268],[49.83674,8.6325],[49.83693,8.63237],[49.83723,8.63215],[49.83751,8.63193],[49.83781,8.63167],[49.83799,8.6315],[49.83821,8.63131],[49.8384,8.63113],[49.83866,8.63087],[49.83889,8.63062],[49.83911,8.63038],[49.83937,8.63008],[49.8395,8.62992],[49.83966,8.62972],[49.83991,8.6294],[49.84013,8.62912],[49.84036,8.6288],[49.84051,8.62857],[49.84071,8.62827],[49.84086,8.62804],[49.84105,8.62773],[49.84123,8.62742],[49.84143,8.62707],[49.84166,8.62664],[49.84182,8.62634],[49.84195,8.62608],[49.84211,8.62576],[49.8423,8.62535],[49.84249,8.62492],[49.84283,8.62417],[49.84315,8.62341],[49.84357,8.6224],[49.84454,8.62011],[49.84514,8.6187],[49.84551,8.61783],[49.84596,8.6168],[49.84646,8.61567],[49.84688,8.61476],[49.84728,8.61391],[49.84768,8.61311],[49.84812,8.61223],[49.84834,8.61182],[49.84867,8.6112],[49.84922,8.6102],[49.84997,8.60891],[49.8505,8.60803],[49.85097,8.60728],[49.85155,8.60639],[49.85196,8.60579],[49.85235,8.60525],[49.85296,8.60439],[49.8533,8.60395],[49.85343,8.60377],[49.85424,8.60273],[49.85494,8.60187],[49.85619,8.60045],[49.85673,8.60004],[49.85691,8.59992],[49.85709,8.5998],[49.85728,8.59968],[49.85748,8.59958],[49.85772,8.5995],[49.85802,8.59943],[49.85833,8.5994],[49.85865,8.59941],[49.85887,8.59943],[49.85921,8.59949],[49.85953,8.59956],[49.85987,8.59958],[49.86008,8.59957],[49.86043,8.59949],[49.86091,8.59933],[49.86128,8.5992],[49.86147,8.59918],[49.8616,8.59918],[49.86194,8.59919],[49.86255,8.59923],[49.86272,8.59927],[49.86647,8.60011],[49.86726,8.60029],[49.86933,8.60074],[49.87066,8.60104],[49.8736,8.60158],[49.87501,8.60182],[49.87649,8.60207],[49.87691,8.60213],[49.88206,8.603],[49.88674,8.60378],[49.89384,8.60517],[49.89443,8.60529],[49.90278,8.60694],[49.90372,8.60712],[49.904,8.60717],[49.90629,8.60765],[49.90869,8.60814],[49.91,8.60839],[49.91188,8.60877],[49.91375,8.60925],[49.91483,8.60956],[49.9159,8.60992],[49.91653,8.61015],[49.91966,8.61122],[49.92129,8.6118],[49.92274,8.61226],[49.92378,8.61255],[49.92572,8.61296],[49.92674,8.61311],[49.92768,8.61321],[49.92861,8.61328],[49.92994,8.61334],[49.93123,8.61332],[49.93192,8.61327],[49.93246,8.61324],[49.93368,8.61312],[49.93604,8.61269],[49.93817,8.61218],[49.93866,8.61207],[49.94315,8.61101],[49.94401,8.6108],[49.94869,8.60967],[49.94973,8.60944],[49.95411,8.6084],[49.96334,8.60618],[49.96899,8.60483],[49.9705,8.60447],[49.97118,8.60431],[49.97176,8.60418],[49.97299,8.60388],[49.97538,8.60331],[49.97586,8.60319],[49.97662,8.60301],[49.97785,8.60272],[49.97915,8.60241],[49.9838,8.6013],[49.98776,8.60035],[49.98894,8.60008],[49.99832,8.59783],[49.99898,8.59767],[49.99965,8.59753],[50.00037,8.59734],[50.00311,8.59669],[50.00432,8.59646],[50.00456,8.59641],[50.00482,8.59634],[50.00591,8.59606],[50.00775,8.59557],[50.00835,8.59544],[50.00914,8.59525],[50.01227,8.5945],[50.01291,8.59435],[50.01521,8.5938],[50.01685,8.59343],[50.0175,8.59331],[50.0179,8.59324],[50.01879,8.5931],[50.01926,8.59303],[50.01991,8.59293],[50.02029,8.59288],[50.0211,8.5928],[50.02158,8.59277],[50.02202,8.59274],[50.02282,8.59271],[50.02326,8.59271],[50.02426,8.59272],[50.02523,8.59277],[50.02571,8.59282],[50.0262,8.59287],[50.02692,8.59296],[50.02761,8.59306],[50.02857,8.59325],[50.02893,8.59332],[50.02912,8.59337],[50.03083,8.5938],[50.03168,8.59407],[50.03252,8.59437],[50.03359,8.59479],[50.0347,8.59525],[50.03504,8.5954],[50.03553,8.59563],[50.03592,8.59582],[50.03643,8.59606],[50.03691,8.59629],[50.0378,8.59673],[50.03919,8.59741],[50.04043,8.59804],[50.04347,8.59956],[50.04566,8.60065],[50.04601,8.60082],[50.04741,8.6015],[50.05234,8.60396],[50.0536,8.60459],[50.0548,8.6052],[50.05639,8.60599],[50.0567,8.60615],[50.05704,8.60631],[50.05751,8.60655],[50.0586,8.6071],[50.05948,8.60753],[50.06047,8.60803],[50.06092,8.60825],[50.06136,8.60847],[50.06184,8.60872],[50.06225,8.60896],[50.06257,8.6091],[50.06348,8.60956],[50.06437,8.61],[50.0644,8.61001],[50.0648,8.61021],[50.0649,8.61027],[50.06617,8.6109],[50.0673,8.61146],[50.06837,8.612],[50.06959,8.61261],[50.07065,8.61314],[50.07124,8.61344],[50.0727,8.61416],[50.07331,8.61447],[50.07388,8.61475],[50.07423,8.61493],[50.07465,8.61514],[50.07498,8.61531],[50.07514,8.61539],[50.07538,8.6155],[50.07561,8.61562],[50.07587,8.61575],[50.07631,8.61598],[50.0766,8.61612],[50.07701,8.61632],[50.07729,8.61646],[50.07765,8.61664],[50.07806,8.61685],[50.07837,8.617],[50.07868,8.61715],[50.07899,8.61729],[50.07946,8.6175],[50.07961,8.61757],[50.07992,8.61769],[50.08023,8.61781],[50.08055,8.61791],[50.08086,8.61801],[50.08113,8.61809],[50.08129,8.61813],[50.0816,8.61821],[50.0818,8.61825],[50.08213,8.61831],[50.08244,8.61837],[50.08293,8.61843],[50.08325,8.61847],[50.08352,8.61848],[50.08384,8.6185],[50.08432,8.61851],[50.08462,8.6185],[50.08498,8.61865],[50.0851,8.61869],[50.0852,8.61875],[50.08526,8.6188],[50.08532,8.61885],[50.08537,8.61892],[50.08544,8.61902],[50.08563,8.61938],[50.08568,8.61946],[50.08574,8.61954],[50.0858,8.61959],[50.08586,8.61963],[50.08593,8.61965],[50.086,8.61965],[50.08604,8.61966],[50.08608,8.61965],[50.08615,8.61964],[50.08634,8.61957],[50.08643,8.61955],[50.08701,8.61941],[50.08713,8.61939],[50.08742,8.61937],[50.08754,8.61935],[50.08769,8.61933],[50.08778,8.61937],[50.08782,8.61941],[50.08785,8.61946],[50.08787,8.61952],[50.08788,8.61962],[50.08789,8.61978],[50.08792,8.61995],[50.08793,8.62069],[50.08792,8.62123],[50.08787,8.62236],[50.08785,8.62287],[50.08783,8.62343],[50.08781,8.62379],[50.08779,8.62495],[50.08779,8.62577],[50.08779,8.62653],[50.0878,8.62722],[50.08782,8.62817],[50.08783,8.62853],[50.08783,8.62862],[50.08784,8.62875],[50.08785,8.62892],[50.08785,8.62895],[50.08792,8.62938],[50.08794,8.62958],[50.08798,8.6301],[50.08794,8.63012],[50.08793,8.63013],[50.08791,8.63014],[50.0879,8.63016],[50.08789,8.63018],[50.08788,8.6302],[50.08787,8.63024],[50.08787,8.63029],[50.08785,8.63055],[50.08783,8.63125],[50.08783,8.63131],[50.08782,8.6314],[50.08782,8.63144],[50.0878,8.63148],[50.08778,8.63152],[50.08777,8.63154],[50.08774,8.63156],[50.0876,8.63164],[50.08606,8.63232],[50.08568,8.63249],[50.08481,8.63288],[50.08475,8.63291],[50.08467,8.63294],[50.08468,8.6331],[50.08468,8.63316],[50.08469,8.63362],[50.08471,8.63403],[50.08473,8.63445],[50.08473,8.63456],[50.08474,8.63461],[50.08475,8.63465],[50.08476,8.63468],[50.08478,8.63471],[50.0848,8.63474],[50.08492,8.63483],[50.085,8.63489],[50.08508,8.63497],[50.08549,8.6355],[50.08588,8.636],[50.08597,8.63612],[50.08603,8.63622],[50.08606,8.63627],[50.08609,8.63632],[50.08614,8.63641],[50.08618,8.63652],[50.0862,8.63658],[50.08621,8.63664],[50.08622,8.63669],[50.08623,8.63692],[50.08623,8.63705],[50.08626,8.63754],[50.08628,8.63811],[50.08628,8.63819],[50.08629,8.63827],[50.08629,8.63844],[50.0863,8.63852],[50.0863,8.63863],[50.08639,8.64046],[50.08644,8.64131],[50.08647,8.64172],[50.08648,8.64191],[50.08648,8.64196],[50.08648,8.64209],[50.08649,8.64222],[50.08649,8.64225],[50.08651,8.64245],[50.08656,8.64332],[50.08662,8.64417],[50.08663,8.6443],[50.08664,8.6443],[50.08671,8.64428],[50.08681,8.64424],[50.08691,8.64421],[50.08727,8.6441],[50.08731,8.64409],[50.08731,8.64418],[50.08744,8.64533],[50.08733,8.64536],[50.08696,8.64546],[50.08689,8.64548]];
 
 /* ---------- Physik & Helfer ---------- */
+/* TODO: exakte Adresse des Umspannwerks (".. 58, 64342 Seeheim-Jugenheim")
+   einsetzen, sobald der Straßenname bekannt ist - bislang allgemeiner
+   Seeheim-Jugenheim-Punkt als Platzhalter für die Gesamtnetz-Einspeisung. */
 const SOURCE={name:"Seeheim-Jugenheim",lat:49.765,lng:8.658};
 const SPEED_STROM_KM_S=200000, SPEED_GAS_KM_H=40;
 const ANIM_STROM_MS=2600, ANIM_GAS_MS=18000;
@@ -901,25 +912,31 @@ function addWaypointMarkers(list,color){
 addWaypointMarkers(powerWaypoints,"#ffd54a");
 addWaypointMarkers(gasWaypoints,"#4ac6ff");
 
-map.fitBounds(L.latLngBounds(ROUTE_POWER_D).extend(L.latLngBounds(ROUTE_GAS_D)).pad(0.18));
-
 const stromMarker=L.marker(routeP.g[0],{icon:L.divIcon({className:"pulse-icon",html:"<div></div>",iconSize:[18,18],iconAnchor:[9,9]})});
 const gasMarker=L.marker(routeG.g[0],{icon:L.divIcon({className:"gas-icon",html:"<div></div>",iconSize:[16,16],iconAnchor:[8,8]})});
 const hiP=L.polyline([],{renderer:cHi,color:"#ffd54a",weight:5.5,opacity:0.98});
 const hiG=L.polyline([],{renderer:cHi,color:"#4ac6ff",weight:5.5,opacity:0.98});
 
+/* Wellenfront-Layer für den "Gesamtnetz Deutschland"-Modus */
+const hiWave=L.polyline([],{renderer:cHi,color:"#ffd54a",weight:2.4,opacity:0.98});
+const front=L.circle([SOURCE.lat,SOURCE.lng],{radius:0,color:"#ffffff",weight:1.2,opacity:0.6,fill:false,dashArray:"4 7"});
+const srcMarker=L.circleMarker([SOURCE.lat,SOURCE.lng],{radius:6,color:"#ffffff",weight:2,fillColor:"#ff3b3b",fillOpacity:1})
+  .bindTooltip("Einspeisepunkt: "+SOURCE.name,{direction:"top",offset:[0,-8]});
+
 /* Legende */
 document.getElementById("legend").innerHTML=
   '<div class="row"><span class="src" style="background:#ffd54a;"></span> Lieferroute Strom: Seeheim-Jugenheim → Pfungstadt → Frankfurt · '+fmt(routeP.len,1)+'&nbsp;km</div>'+
   '<div class="row"><span class="src" style="background:#4ac6ff;"></span> Lieferroute Gas: Seeheim-Jugenheim → Frankfurt · '+fmt(routeG.len,1)+'&nbsp;km</div>'+
-  '<div class="row" style="margin-top:6px;"><span class="swatch" style="border-top-color:#9c7d24"></span> Stromnetz gesamt (Hintergrund) · '+fmt(P.km,0)+'&nbsp;km · '+P.segs.toLocaleString("de-DE")+' Segmente</div>'+
-  '<div class="row"><span class="swatch" style="border-top-color:#1f7f9c"></span> Gasleitungen gesamt (Hintergrund) · '+fmt(G.km,0)+'&nbsp;km · '+G.segs.toLocaleString("de-DE")+' Segmente</div>'+
+  '<div class="row" style="margin-top:6px;"><span class="swatch" style="border-top-color:#9c7d24"></span> Stromnetz gesamt (DE) · '+fmt(P.km,0)+'&nbsp;km · '+P.segs.toLocaleString("de-DE")+' Segmente</div>'+
+  '<div class="row"><span class="swatch" style="border-top-color:#1f7f9c"></span> Gasleitungen gesamt (DE) · '+fmt(G.km,0)+'&nbsp;km · '+G.segs.toLocaleString("de-DE")+' Segmente</div>'+
   '<div class="row" style="margin-top:4px;color:var(--muted);">Klick auf eine Hintergrund-Leitung: Von/Nach, Betreiber &amp; Kapazität</div>'+
   '<div class="row" style="color:var(--muted);">Laufende Punkte: nur Strom ≥ 220&nbsp;kV (Performance)</div>';
 
-/* Zeiten für die konkrete Lieferroute (nicht mehr die ganze Netzausdehnung) */
-const stromMsP=routeP.len/SPEED_STROM_KM_S*1000;
-const gasHG=routeG.len/SPEED_GAS_KM_H;
+/* Zeiten: Route (Seeheim -> Frankfurt) und Gesamtnetz (weiteste Ausdehnung ab Einspeisepunkt) */
+const stromMsRoute=routeP.len/SPEED_STROM_KM_S*1000;
+const gasHRoute=routeG.len/SPEED_GAS_KM_H;
+const stromMsNet=P.maxR/SPEED_STROM_KM_S*1000;
+const gasHNet=G.maxR/SPEED_GAS_KM_H;
 
 const btnStrom=document.getElementById("btnStrom"),btnGas=document.getElementById("btnGas"),btnReset=document.getElementById("btnReset");
 const statusEl=document.getElementById("status");
@@ -927,17 +944,51 @@ const tgPower=document.getElementById("tgPower"), tgGas=document.getElementById(
 tgPower.addEventListener("change",e=>{e.target.checked?powerBase.addTo(map):map.removeLayer(powerBase);});
 tgGas.addEventListener("change",e=>{e.target.checked?gasBase.addTo(map):map.removeLayer(gasBase);});
 
-document.getElementById("stromZeit").textContent="≈ "+fmt(stromMsP,4)+" Millisekunden";
-document.getElementById("stromFakt").innerHTML=
-  "Strecke entlang der Straße: Seeheim-Jugenheim → Umspannanlage Pfungstadt → Umspannwerk Hochstraße (Frankfurt, Mainova), "+fmt(routeP.len,1)+"&nbsp;km. Rechnung: "+fmt(routeP.len,1)+"&nbsp;km ÷ 200.000&nbsp;km/s = "+fmt(stromMsP,4)+"&nbsp;ms. Die Elektronen selbst driften nur mit wenigen mm/s – das Feld überträgt die Energie, nicht die Teilchen.";
-document.getElementById("gasZeit").textContent="≈ "+fmt(gasHG,2)+" Stunden ("+fmt(gasHG*60,0)+" Minuten)";
-document.getElementById("gasFakt").innerHTML=
-  "Strecke: Gas-Übernahmestation Schuldorf (Seeheim-Jugenheim) → Erdgasregelanlage Frankfurt (Mainova), "+fmt(routeG.len,1)+"&nbsp;km. Rechnung: "+fmt(routeG.len,1)+"&nbsp;km ÷ 40&nbsp;km/h = "+fmt(gasHG,2)+"&nbsp;h. Das Gas ist damit rund <strong>"+fmt(gasHG*3600*1000/stromMsP,0)+"-mal langsamer</strong> als der Strom.";
-document.getElementById("gasRaffer").textContent=
-  "Zeitraffer: "+fmt(gasHG,2)+" Stunden werden in "+(ANIM_GAS_MS/1000)+" Sekunden gezeigt (≈ "+fmt(gasHG*3600/(ANIM_GAS_MS/1000),0)+"-fach beschleunigt).";
+/* ---------- Moduswahl: Lieferroute vs. Gesamtnetz Deutschland ---------- */
+const modeRouteBtn=document.getElementById("modeRoute"), modeNetBtn=document.getElementById("modeNet");
+let mode="route";
 
-/* ---------- Routen-Animation (Buttons) ---------- */
+function updateInfoTexts(){
+  if(mode==="route"){
+    document.getElementById("stromZeit").textContent="≈ "+fmt(stromMsRoute,4)+" Millisekunden";
+    document.getElementById("stromFakt").innerHTML=
+      "Strecke entlang der Straße: Seeheim-Jugenheim → Umspannanlage Pfungstadt → Umspannwerk Hochstraße (Frankfurt, Mainova), "+fmt(routeP.len,1)+"&nbsp;km. Rechnung: "+fmt(routeP.len,1)+"&nbsp;km ÷ 200.000&nbsp;km/s = "+fmt(stromMsRoute,4)+"&nbsp;ms. Die Elektronen selbst driften nur mit wenigen mm/s – das Feld überträgt die Energie, nicht die Teilchen.";
+    document.getElementById("gasZeit").textContent="≈ "+fmt(gasHRoute,2)+" Stunden ("+fmt(gasHRoute*60,0)+" Minuten)";
+    document.getElementById("gasFakt").innerHTML=
+      "Strecke: Gas-Übernahmestation Schuldorf (Seeheim-Jugenheim) → Erdgasregelanlage Frankfurt (Mainova), "+fmt(routeG.len,1)+"&nbsp;km. Rechnung: "+fmt(routeG.len,1)+"&nbsp;km ÷ 40&nbsp;km/h = "+fmt(gasHRoute,2)+"&nbsp;h. Das Gas ist damit rund <strong>"+fmt(gasHRoute*3600*1000/stromMsRoute,0)+"-mal langsamer</strong> als der Strom.";
+    document.getElementById("gasRaffer").textContent=
+      "Zeitraffer: "+fmt(gasHRoute,2)+" Stunden werden in "+(ANIM_GAS_MS/1000)+" Sekunden gezeigt (≈ "+fmt(gasHRoute*3600/(ANIM_GAS_MS/1000),0)+"-fach beschleunigt).";
+  }else{
+    document.getElementById("stromZeit").textContent="≈ "+fmt(stromMsNet,3)+" Millisekunden";
+    document.getElementById("stromFakt").innerHTML=
+      "Weiteste Netzausdehnung ab Einspeisepunkt "+SOURCE.name+": "+fmt(P.maxR,0)+"&nbsp;km. Rechnung: "+fmt(P.maxR,0)+"&nbsp;km ÷ 200.000&nbsp;km/s = "+fmt(stromMsNet,3)+"&nbsp;ms. Die Elektronen selbst driften nur mit wenigen mm/s – das Feld überträgt die Energie, nicht die Teilchen.";
+    document.getElementById("gasZeit").textContent="≈ "+fmt(gasHNet,1)+" Stunden ("+fmt(gasHNet/24,1)+" Tage)";
+    document.getElementById("gasFakt").innerHTML=
+      "Weiteste Netzausdehnung ab Einspeisepunkt "+SOURCE.name+": "+fmt(G.maxR,0)+"&nbsp;km. Rechnung: "+fmt(G.maxR,0)+"&nbsp;km ÷ 40&nbsp;km/h = "+fmt(gasHNet,1)+"&nbsp;h. Das Gas ist damit rund <strong>"+fmt(gasHNet*3600*1000/stromMsNet,0)+"-mal langsamer</strong> als der Strom.";
+    document.getElementById("gasRaffer").textContent=
+      "Zeitraffer: "+fmt(gasHNet,1)+" Stunden werden in "+(ANIM_GAS_MS/1000)+" Sekunden gezeigt (≈ "+fmt(gasHNet*3600/(ANIM_GAS_MS/1000),0)+"-fach beschleunigt).";
+  }
+}
+
+function setMode(m){
+  mode=m;
+  modeRouteBtn.classList.toggle("active",m==="route");
+  modeNetBtn.classList.toggle("active",m==="network");
+  if(m==="network"){
+    srcMarker.addTo(map);
+    map.fitBounds(powerBase.getBounds().extend(gasBase.getBounds()).pad(0.05));
+  }else{
+    if(map.hasLayer(srcMarker))map.removeLayer(srcMarker);
+    map.fitBounds(L.latLngBounds(ROUTE_POWER_D).extend(L.latLngBounds(ROUTE_GAS_D)).pad(0.18));
+  }
+  reset();
+}
+modeRouteBtn.addEventListener("click",()=>setMode("route"));
+modeNetBtn.addEventListener("click",()=>setMode("network"));
+
+/* ---------- Animation (Buttons) ---------- */
 let rafId=null;
+function activeCount(dists,r){let lo=0,hi=dists.length;while(lo<hi){const m=(lo+hi)>>1;if(dists[m]<=r)lo=m+1;else hi=m;}return lo;}
 function setButtons(d){btnStrom.disabled=d;btnGas.disabled=d;}
 
 function reset(){
@@ -946,10 +997,16 @@ function reset(){
   hiG.setLatLngs([]); if(map.hasLayer(hiG))map.removeLayer(hiG);
   if(map.hasLayer(stromMarker))map.removeLayer(stromMarker);
   if(map.hasLayer(gasMarker))map.removeLayer(gasMarker);
+  hiWave.setLatLngs([]); if(map.hasLayer(hiWave))map.removeLayer(hiWave);
+  front.setRadius(0); if(map.hasLayer(front))map.removeLayer(front);
   document.getElementById("infoStrom").style.display="none";
   document.getElementById("infoGas").style.display="none";
   setButtons(false);
-  statusEl.textContent="Bereit · Route Strom: "+fmt(routeP.len,1)+" km ("+fmt(stromMsP,4)+" ms) · Route Gas: "+fmt(routeG.len,1)+" km ("+fmt(gasHG,2)+" h)";
+  updateInfoTexts();
+  if(mode==="route")
+    statusEl.textContent="Bereit · Route Strom: "+fmt(routeP.len,1)+" km ("+fmt(stromMsRoute,4)+" ms) · Route Gas: "+fmt(routeG.len,1)+" km ("+fmt(gasHRoute,2)+" h)";
+  else
+    statusEl.textContent="Bereit · Gesamtnetz: Strom bis "+fmt(P.maxR,0)+" km ("+fmt(stromMsNet,3)+" ms) · Gas bis "+fmt(G.maxR,0)+" km ("+fmt(gasHNet,1)+" h)";
 }
 
 function runRoute(kind){
@@ -960,7 +1017,7 @@ function runRoute(kind){
   const hiLine=isStrom?hiP:hiG;
   const waypoints=isStrom?powerWaypoints:gasWaypoints;
   const dur=isStrom?ANIM_STROM_MS:ANIM_GAS_MS;
-  const realMs=isStrom?stromMsP:gasHG*3600000;
+  const realMs=isStrom?stromMsRoute:gasHRoute*3600000;
   marker.setLatLng(route.g[0]).addTo(map);
   hiLine.setLatLngs([]).addTo(map);
   const t0=performance.now();
@@ -973,21 +1030,50 @@ function runRoute(kind){
     const nextWp=waypoints[legIdx+1];
     const label=nextWp ? "unterwegs zu "+nextWp.name+" ("+fmt(d,1)+" / "+fmt(route.len,1)+" km)" : "am Ziel";
     if(isStrom) statusEl.textContent="⚡ "+label+" · reale Zeit "+fmt(f*realMs,4)+" ms";
-    else statusEl.textContent="🔥 "+label+" · simulierte Zeit "+fmt(f*gasHG,2)+" h";
+    else statusEl.textContent="🔥 "+label+" · simulierte Zeit "+fmt(f*gasHRoute,2)+" h";
     if(f<1){rafId=requestAnimationFrame(frame);}
     else{
       const toName=waypoints[waypoints.length-1].name;
-      if(isStrom){statusEl.textContent="⚡ Angekommen: "+toName+" – reale Übertragungszeit nur "+fmt(stromMsP,4)+" ms.";document.getElementById("infoStrom").style.display="block";}
-      else{statusEl.textContent="🔥 Angekommen: "+toName+" – reale Transportzeit "+fmt(gasHG,2)+" h ("+fmt(gasHG*60,0)+" min).";document.getElementById("infoGas").style.display="block";}
+      if(isStrom){statusEl.textContent="⚡ Angekommen: "+toName+" – reale Übertragungszeit nur "+fmt(stromMsRoute,4)+" ms.";document.getElementById("infoStrom").style.display="block";}
+      else{statusEl.textContent="🔥 Angekommen: "+toName+" – reale Transportzeit "+fmt(gasHRoute,2)+" h ("+fmt(gasHRoute*60,0)+" min).";document.getElementById("infoGas").style.display="block";}
       setButtons(false);
     }
   }
   rafId=requestAnimationFrame(frame);
 }
-btnStrom.addEventListener("click",()=>runRoute("strom"));
-btnGas.addEventListener("click",()=>runRoute("gas"));
+
+function runWavefront(kind){
+  reset(); setButtons(true);
+  const isStrom=kind==="strom";
+  const net=isStrom?P:G;
+  const color=isStrom?"#ffd54a":"#4ac6ff";
+  const dur=isStrom?ANIM_STROM_MS:ANIM_GAS_MS;
+  const realMs=isStrom?stromMsNet:gasHNet*3600000;
+  srcMarker.addTo(map);
+  hiWave.setStyle({color}).setLatLngs([]).addTo(map);
+  front.setStyle({color}).setRadius(0).addTo(map);
+  const t0=performance.now();
+  function frame(now){
+    const f=Math.min((now-t0)/dur,1);
+    const r=f*net.maxR;
+    hiWave.setLatLngs(net.sortedGeom.slice(0,activeCount(net.sortedDist,r)));
+    front.setRadius(r*1000);
+    if(isStrom) statusEl.textContent="⚡ Wellenfront "+fmt(r,0)+" km · reale Zeit "+fmt(f*realMs,3)+" ms";
+    else statusEl.textContent="🔥 Wellenfront "+fmt(r,0)+" km · simulierte Zeit "+fmt(f*gasHNet,1)+" h";
+    if(f<1){rafId=requestAnimationFrame(frame);}
+    else{
+      if(isStrom){statusEl.textContent="⚡ Ganzes Netz erreicht – reale Zeit nur "+fmt(stromMsNet,3)+" ms.";document.getElementById("infoStrom").style.display="block";}
+      else{statusEl.textContent="🔥 Ganzes Netz erreicht – reale Zeit "+fmt(gasHNet,1)+" h.";document.getElementById("infoGas").style.display="block";}
+      setButtons(false);
+    }
+  }
+  rafId=requestAnimationFrame(frame);
+}
+
+btnStrom.addEventListener("click",()=>mode==="route"?runRoute("strom"):runWavefront("strom"));
+btnGas.addEventListener("click",()=>mode==="route"?runRoute("gas"):runWavefront("gas"));
 btnReset.addEventListener("click",reset);
-reset();
+setMode("route");
 
 /* ---------- Durchgehende Fluss-Punkte (immer aktiv, illustrativ) ---------- */
 const flowCanvas=document.createElement("canvas");
