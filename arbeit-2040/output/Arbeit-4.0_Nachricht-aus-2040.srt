@@ -1,0 +1,399 @@
+1
+00:00:02,600 --> 00:00:06,590
+Hallo, Jahrgang 2026! Hier ist Luca …
+
+2
+00:00:06,840 --> 00:00:11,500
+… und Zamir. Wir sind 32
+und leben im Jahr 2040.
+
+3
+00:00:11,920 --> 00:00:13,780
+Wir zeigen euch, wie wir arbeiten.
+
+4
+00:00:13,820 --> 00:00:17,160
+Und was ihr heute schon
+davon beeinflussen könnt.
+
+5
+00:00:19,360 --> 00:00:20,730
+Guten Morgen, Luca.
+
+6
+00:00:20,770 --> 00:00:24,710
+Deine Agenten haben über
+Nacht 41 Aufgaben erledigt.
+
+7
+00:00:24,750 --> 00:00:26,740
+Zwei Entscheidungen warten auf dich.
+
+8
+00:00:27,160 --> 00:00:28,410
+Mein Dienstag.
+
+9
+00:00:28,450 --> 00:00:30,880
+Ich leite Projekte für Energiespeicher.
+
+10
+00:00:30,920 --> 00:00:34,666
+Meine KI-Agenten schreiben Berichte
+und rechnen Angebote durch –
+
+11
+00:00:34,706 --> 00:00:37,250
+ich entscheide und trage
+die Verantwortung.
+
+12
+00:00:37,670 --> 00:00:40,970
+Mein Team sitzt in Lissabon,
+Seoul und Leipzig.
+
+13
+00:00:41,010 --> 00:00:44,430
+Ins Büro fahre ich zweimal
+pro Woche – zum Austausch.
+
+14
+00:00:44,470 --> 00:00:46,070
+Und freitags habe ich frei.
+
+15
+00:00:47,270 --> 00:00:49,360
+Mein Dienstag sieht anders aus.
+
+16
+00:00:49,400 --> 00:00:53,893
+Ich habe einen eigenen Meisterbetrieb
+für Solaranlagen und Wärmepumpen –
+
+17
+00:00:53,933 --> 00:00:56,640
+um halb acht stehe ich
+auf dem ersten Dach.
+
+18
+00:00:57,060 --> 00:01:01,110
+Die KI-Brille zeigt mir,
+welches Bauteil spinnt.
+
+19
+00:01:01,150 --> 00:01:04,600
+Reparieren und dafür
+geradestehen muss ich selbst.
+
+20
+00:01:04,640 --> 00:01:06,320
+Homeoffice? Geht bei mir nicht.
+
+21
+00:01:06,360 --> 00:01:09,540
+Dafür ist mein Auftragsbuch bis März voll.
+
+22
+00:01:10,940 --> 00:01:12,410
+Wie es so weit kam?
+
+23
+00:01:12,450 --> 00:01:16,434
+Nach Dampfmaschine, Fließband
+und Computer folgte Stufe vier:
+
+24
+00:01:16,474 --> 00:01:19,310
+vernetzte Daten und
+künstliche Intelligenz.
+
+25
+00:01:19,730 --> 00:01:24,120
+Und das Wichtigste vorweg: KI
+ersetzt selten ganze Berufe.
+
+26
+00:01:24,160 --> 00:01:26,230
+Sie übernimmt einzelne Tätigkeiten.
+
+27
+00:01:27,430 --> 00:01:32,043
+Schon 2022 arbeiteten 38 %
+der Beschäftigten in Berufen,
+
+28
+00:01:32,083 --> 00:01:36,820
+deren Tätigkeiten zu über 70 %
+technisch ersetzbar waren.
+
+29
+00:01:37,240 --> 00:01:43,460
+Trotzdem erwartete das Weltwirtschaftsforum
+bis 2030 mehr neue Jobs als wegfallende.
+
+30
+00:01:43,500 --> 00:01:48,100
+Und weil die Babyboomer in Rente
+gehen, fehlen eher Menschen als Jobs.
+
+31
+00:01:48,520 --> 00:01:51,140
+Die Ärztin lässt Röntgenbilder von der KI
+
+32
+00:01:51,180 --> 00:01:54,100
+vorsortieren und hat
+mehr Zeit für Gespräche.
+
+33
+00:01:54,520 --> 00:01:58,550
+Und Pflege, Handwerk und Energiewende
+suchen händeringend Leute.
+
+34
+00:01:58,590 --> 00:02:00,780
+Ich könnte sofort drei einstellen.
+
+35
+00:02:01,980 --> 00:02:04,150
+Auch der Arbeitsort hat sich verändert.
+
+36
+00:02:04,190 --> 00:02:10,430
+Vor Corona arbeiteten etwa 5 % zu
+Hause – ab 2022 stabil ein Viertel.
+
+37
+00:02:10,850 --> 00:02:13,465
+Das ifo Institut prognostizierte deshalb:
+
+38
+00:02:13,505 --> 00:02:16,768
+In den sieben größten Städten
+wird langfristig rund
+
+39
+00:02:16,808 --> 00:02:19,010
+12 % weniger Bürofläche gebraucht.
+
+40
+00:02:19,430 --> 00:02:21,510
+Büros wurden zu Treffpunkten.
+
+41
+00:02:21,550 --> 00:02:25,590
+Und leere Bürotürme werden nur
+selten zu bezahlbaren Wohnungen.
+
+42
+00:02:26,790 --> 00:02:29,820
+Aktientipps aus der Zukunft
+gibt es von uns nicht.
+
+43
+00:02:29,860 --> 00:02:32,650
+Aber ein Muster: Die
+Börse reagiert zuerst.
+
+44
+00:02:33,070 --> 00:02:36,438
+Weil alle KI-Rechenzentren bauen wollten,
+
+45
+00:02:36,478 --> 00:02:42,090
+war Nvidia 2025 als erstes Unternehmen
+über 4 Billionen Dollar wert.
+
+46
+00:02:42,130 --> 00:02:48,220
+Die Zoom-Aktie dagegen explodierte im
+Homeoffice-Hype – und verlor danach über 80 %.
+
+47
+00:02:48,640 --> 00:02:52,040
+Gehandelt wird immer schneller,
+zunehmend von Algorithmen.
+
+48
+00:02:52,080 --> 00:02:55,162
+Und immer mehr junge Menschen investieren:
+
+49
+00:02:55,202 --> 00:02:59,440
+2025 besaß jeder Fünfte in
+Deutschland Aktien oder Fonds.
+
+50
+00:03:00,640 --> 00:03:05,650
+Privat heißt das für mich: weniger Pendeln,
+mehr Zeit für Familie und Freunde.
+
+51
+00:03:05,690 --> 00:03:10,487
+In einem deutschen Pilotprojekt zur
+Vier-Tage-Woche stieg die Lebenszufriedenheit –
+
+52
+00:03:10,527 --> 00:03:12,100
+bei gleicher Produktivität.
+
+53
+00:03:12,520 --> 00:03:16,560
+Aber wenn das Büro im Wohnzimmer
+steht, verschwimmen die Grenzen.
+
+54
+00:03:16,600 --> 00:03:20,100
+Dauer-Erreichbarkeit und
+Einsamkeit sind die Kehrseite.
+
+55
+00:03:20,140 --> 00:03:23,670
+Abschalten ist bei uns keine
+Schwäche, sondern eine Fähigkeit.
+
+56
+00:03:24,870 --> 00:03:27,260
+Am härtesten ist der Einstieg.
+
+57
+00:03:27,300 --> 00:03:32,310
+Denn KI erledigt genau die Aufgaben, an
+denen Berufsanfänger früher gelernt haben.
+
+58
+00:03:32,730 --> 00:03:37,848
+Laut einer Stanford-Studie sank in
+den USA in stark KI-betroffenen
+
+59
+00:03:37,888 --> 00:03:42,380
+Berufen die Beschäftigung der
+22- bis 25-Jährigen um 16 %.
+
+60
+00:03:42,420 --> 00:03:44,890
+Der Karriereleiter fehlt
+die unterste Sprosse.
+
+61
+00:03:45,310 --> 00:03:50,170
+Aufsteigen kann, wer früh echte Projekte
+macht und nie aufhört zu lernen.
+
+62
+00:03:50,210 --> 00:03:53,630
+Bei mir hieß das: Ausbildung,
+Meister, eigener Betrieb.
+
+63
+00:03:53,670 --> 00:03:57,250
+Denn Verantwortung übernehmen
+kann keine Maschine.
+
+64
+00:03:58,450 --> 00:03:59,770
+Und wer wird reicher?
+
+65
+00:03:59,810 --> 00:04:02,290
+Vor allem die, denen
+die Maschinen gehören.
+
+66
+00:04:02,330 --> 00:04:05,996
+Der Internationale Währungsfonds
+warnte schon 2024:
+
+67
+00:04:06,036 --> 00:04:08,870
+KI dürfte die Ungleichheit verschärfen.
+
+68
+00:04:09,290 --> 00:04:14,180
+In Deutschland besitzen die reichsten
+10 % mehr als die Hälfte des Vermögens.
+
+69
+00:04:14,220 --> 00:04:16,351
+Laut OECD kann der Aufstieg aus einer
+
+70
+00:04:16,391 --> 00:04:19,560
+einkommensschwachen Familie
+sechs Generationen dauern.
+
+71
+00:04:19,980 --> 00:04:24,006
+Und Homeoffice ist ein Privileg:
+Wer pflegt, baut oder –
+
+72
+00:04:24,046 --> 00:04:28,330
+wie ich – Anlagen installiert,
+arbeitet nicht vom Sofa aus.
+
+73
+00:04:29,530 --> 00:04:31,450
+Wie wird man also reich?
+
+74
+00:04:31,490 --> 00:04:35,110
+Selten durch Gehalt allein –
+sondern durch Eigentum und Zeit.
+
+75
+00:04:35,530 --> 00:04:40,091
+Wer ab 16 jeden Monat 50 €
+breit gestreut anlegt,
+
+76
+00:04:40,131 --> 00:04:44,880
+könnte bei 6 % Rendite mit
+67 rund 200.000 € haben.
+
+77
+00:04:44,920 --> 00:04:48,730
+Wer erst mit 36 startet: gut 50.000 €.
+
+78
+00:04:48,770 --> 00:04:50,150
+Garantiert ist das nicht.
+
+79
+00:04:50,570 --> 00:04:52,730
+Zweitens: Lernt, was KI ergänzt.
+
+80
+00:04:52,770 --> 00:04:54,400
+Drittens: Gründen.
+
+81
+00:04:54,440 --> 00:04:57,297
+KI macht es billiger, ich habe es gewagt –
+
+82
+00:04:57,337 --> 00:05:01,200
+aber für jede Erfolgsstory
+gibt es viele, die scheitern.
+
+83
+00:05:02,800 --> 00:05:06,030
+Unser 2040 ist nicht vom Himmel gefallen.
+
+84
+00:05:06,070 --> 00:05:08,485
+Es ist das Ergebnis eurer Entscheidungen:
+
+85
+00:05:08,525 --> 00:05:11,280
+in der Schule, im ersten
+Job, an der Wahlurne.
+
+86
+00:05:11,700 --> 00:05:13,900
+Die Zukunft der Arbeit ist kein Schicksal.
+
+87
+00:05:14,200 --> 00:05:15,200
+Wir sehen uns!
