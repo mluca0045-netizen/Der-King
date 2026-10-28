@@ -1,0 +1,357 @@
+1
+00:00:02,600 --> 00:00:05,000
+Hallo, Jahrgang 2026!
+
+2
+00:00:05,040 --> 00:00:06,440
+Hier ist Lea.
+
+3
+00:00:06,480 --> 00:00:09,880
+Ich bin 32 und lebe im Jahr 2040.
+
+4
+00:00:10,300 --> 00:00:11,810
+Ich zeige euch, wie wir arbeiten.
+
+5
+00:00:11,850 --> 00:00:14,320
+Und was ihr heute schon
+davon beeinflussen könnt.
+
+6
+00:00:16,520 --> 00:00:18,000
+Guten Morgen, Lea.
+
+7
+00:00:18,040 --> 00:00:22,140
+Deine Agenten haben über
+Nacht 41 Aufgaben erledigt.
+
+8
+00:00:22,180 --> 00:00:24,380
+Zwei Entscheidungen warten auf dich.
+
+9
+00:00:24,800 --> 00:00:25,920
+Mein Dienstag.
+
+10
+00:00:25,960 --> 00:00:28,330
+Ich leite Projekte für Batteriespeicher.
+
+11
+00:00:28,370 --> 00:00:31,949
+Meine KI-Agenten schreiben Berichte
+und rechnen Angebote durch –
+
+12
+00:00:31,989 --> 00:00:34,420
+ich entscheide und trage
+die Verantwortung.
+
+13
+00:00:34,840 --> 00:00:37,540
+Mein Team sitzt in Lissabon,
+Seoul und Leipzig.
+
+14
+00:00:37,580 --> 00:00:41,640
+Ins Büro fahre ich zweimal
+pro Woche – zum Austausch.
+
+15
+00:00:41,680 --> 00:00:43,020
+Und freitags habe ich frei.
+
+16
+00:00:44,420 --> 00:00:45,810
+Wie es so weit kam?
+
+17
+00:00:45,850 --> 00:00:49,822
+Nach Dampfmaschine, Fließband
+und Computer folgte Stufe vier:
+
+18
+00:00:49,862 --> 00:00:52,690
+vernetzte Daten und
+künstliche Intelligenz.
+
+19
+00:00:53,110 --> 00:00:57,350
+Und das Wichtigste vorweg: KI
+ersetzt selten ganze Berufe.
+
+20
+00:00:57,390 --> 00:00:59,470
+Sie übernimmt einzelne Tätigkeiten.
+
+21
+00:01:00,670 --> 00:01:05,249
+Schon 2022 arbeiteten 38 %
+der Beschäftigten in Berufen,
+
+22
+00:01:05,289 --> 00:01:09,990
+deren Tätigkeiten zu über 70 %
+technisch ersetzbar waren.
+
+23
+00:01:10,410 --> 00:01:16,370
+Trotzdem erwartete das Weltwirtschaftsforum
+bis 2030 mehr neue Jobs als wegfallende.
+
+24
+00:01:16,410 --> 00:01:20,520
+Und weil die Babyboomer in Rente
+gehen, fehlen eher Menschen als Jobs.
+
+25
+00:01:20,940 --> 00:01:23,756
+Die Ärztin lässt Röntgenbilder von der KI
+
+26
+00:01:23,796 --> 00:01:26,890
+vorsortieren und hat
+mehr Zeit für Gespräche.
+
+27
+00:01:26,930 --> 00:01:31,390
+Und Pflege, Handwerk und Energiewende
+suchen händeringend Leute.
+
+28
+00:01:32,590 --> 00:01:34,820
+Auch der Arbeitsort hat sich verändert.
+
+29
+00:01:34,860 --> 00:01:41,240
+Vor Corona arbeiteten etwa 5 % zu
+Hause – ab 2022 stabil ein Viertel.
+
+30
+00:01:41,660 --> 00:01:44,012
+Das ifo Institut prognostizierte deshalb:
+
+31
+00:01:44,052 --> 00:01:46,987
+In den sieben größten Städten
+wird langfristig rund
+
+32
+00:01:47,027 --> 00:01:49,010
+12 % weniger Bürofläche gebraucht.
+
+33
+00:01:49,430 --> 00:01:51,350
+Büros wurden zu Treffpunkten.
+
+34
+00:01:51,390 --> 00:01:54,870
+Und leere Bürotürme werden nur
+selten zu bezahlbaren Wohnungen.
+
+35
+00:01:56,070 --> 00:01:59,490
+Aktientipps aus der Zukunft
+gibt es von mir nicht.
+
+36
+00:01:59,530 --> 00:02:02,330
+Aber ein Muster: Die
+Börse reagiert zuerst.
+
+37
+00:02:02,750 --> 00:02:05,824
+Weil alle KI-Rechenzentren bauen wollten,
+
+38
+00:02:05,864 --> 00:02:10,990
+war Nvidia 2025 als erstes Unternehmen
+über 4 Billionen Dollar wert.
+
+39
+00:02:11,030 --> 00:02:16,660
+Die Zoom-Aktie dagegen explodierte im
+Homeoffice-Hype – und verlor danach über 80 %.
+
+40
+00:02:17,080 --> 00:02:20,140
+Gehandelt wird immer schneller,
+zunehmend von Algorithmen.
+
+41
+00:02:20,180 --> 00:02:23,305
+Und immer mehr junge Menschen investieren:
+
+42
+00:02:23,345 --> 00:02:27,640
+2025 besaß jeder Fünfte in
+Deutschland Aktien oder Fonds.
+
+43
+00:02:28,840 --> 00:02:32,990
+Privat heißt das: weniger Pendeln,
+mehr Zeit für Familie und Freunde.
+
+44
+00:02:33,030 --> 00:02:37,932
+In einem deutschen Pilotprojekt zur
+Vier-Tage-Woche stieg die Lebenszufriedenheit –
+
+45
+00:02:37,972 --> 00:02:39,580
+bei gleicher Produktivität.
+
+46
+00:02:40,000 --> 00:02:43,690
+Aber wenn das Büro im Wohnzimmer
+steht, verschwimmen die Grenzen.
+
+47
+00:02:43,730 --> 00:02:47,280
+Dauer-Erreichbarkeit und
+Einsamkeit sind die Kehrseite.
+
+48
+00:02:47,320 --> 00:02:50,610
+Abschalten ist bei uns keine
+Schwäche, sondern eine Fähigkeit.
+
+49
+00:02:51,810 --> 00:02:53,900
+Am härtesten ist der Einstieg.
+
+50
+00:02:53,940 --> 00:02:58,510
+Denn KI erledigt genau die Aufgaben, an
+denen Berufsanfänger früher gelernt haben.
+
+51
+00:02:58,930 --> 00:03:03,728
+Laut einer Stanford-Studie sank in
+den USA in stark KI-betroffenen
+
+52
+00:03:03,768 --> 00:03:07,980
+Berufen die Beschäftigung der
+22- bis 25-Jährigen um 16 %.
+
+53
+00:03:08,020 --> 00:03:10,470
+Der Karriereleiter fehlt
+die unterste Sprosse.
+
+54
+00:03:10,890 --> 00:03:15,160
+Aufsteigen kann, wer früh echte Projekte
+macht und nie aufhört zu lernen.
+
+55
+00:03:15,200 --> 00:03:17,950
+Denn Verantwortung übernehmen
+kann keine Maschine.
+
+56
+00:03:19,150 --> 00:03:20,590
+Und wer wird reicher?
+
+57
+00:03:20,630 --> 00:03:23,580
+Vor allem die, denen
+die Maschinen gehören.
+
+58
+00:03:23,620 --> 00:03:27,241
+Der Internationale Währungsfonds
+warnte schon 2024:
+
+59
+00:03:27,281 --> 00:03:30,080
+KI dürfte die Ungleichheit verschärfen.
+
+60
+00:03:30,500 --> 00:03:35,510
+In Deutschland besitzen die reichsten
+10 % mehr als die Hälfte des Vermögens.
+
+61
+00:03:35,550 --> 00:03:37,527
+Laut OECD kann der Aufstieg aus einer
+
+62
+00:03:37,567 --> 00:03:40,510
+einkommensschwachen Familie
+sechs Generationen dauern.
+
+63
+00:03:40,930 --> 00:03:43,740
+Und Homeoffice ist ein
+Privileg: Wer pflegt,
+
+64
+00:03:43,780 --> 00:03:46,890
+baut oder verkauft, arbeitet
+nicht vom Sofa aus.
+
+65
+00:03:48,090 --> 00:03:49,660
+Wie wird man also reich?
+
+66
+00:03:49,700 --> 00:03:53,220
+Selten durch Gehalt allein –
+sondern durch Eigentum und Zeit.
+
+67
+00:03:53,640 --> 00:03:57,927
+Wer ab 16 jeden Monat 50 €
+breit gestreut anlegt,
+
+68
+00:03:57,967 --> 00:04:02,430
+könnte bei 6 % Rendite mit
+67 rund 200.000 € haben.
+
+69
+00:04:02,470 --> 00:04:06,270
+Wer erst mit 36 startet: gut 50.000 €.
+
+70
+00:04:06,310 --> 00:04:07,560
+Garantiert ist das nicht.
+
+71
+00:04:07,980 --> 00:04:09,920
+Zweitens: Lernt, was KI ergänzt.
+
+72
+00:04:09,960 --> 00:04:12,594
+Drittens: KI macht Gründen billiger –
+
+73
+00:04:12,634 --> 00:04:16,680
+aber für jede Erfolgsstory
+gibt es viele, die scheitern.
+
+74
+00:04:18,280 --> 00:04:21,560
+Unser 2040 ist nicht vom Himmel gefallen.
+
+75
+00:04:21,600 --> 00:04:24,044
+Es ist das Ergebnis eurer Entscheidungen:
+
+76
+00:04:24,084 --> 00:04:26,870
+in der Schule, im ersten
+Job, an der Wahlurne.
+
+77
+00:04:27,290 --> 00:04:29,910
+Die Zukunft der Arbeit ist kein Schicksal.
+
+78
+00:04:29,950 --> 00:04:30,950
+Wir sehen uns!
