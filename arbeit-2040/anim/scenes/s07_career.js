@@ -89,6 +89,18 @@ function S07(tl, S) {
   const resp = box(root, LX2 + 40, rungsY[3] - 40, 1000, 84, 'glass tint-amber', '', 'border-radius:22px;display:flex;align-items:center;gap:18px;padding:0 26px;white-space:nowrap');
   resp.innerHTML = `${icon('signature', 46, '#ffb547', 1.8)}<span style="font:750 32px var(--display)">Verantwortung übernehmen kann keine Maschine</span>`;
   revealUp(tl, resp, tR + .1, { y: 14 });
+
+  // Zamirs Weg als Beispiel
+  const way = box(root, 1250, 470, 540, 250, 'glass tint-amber', '', 'padding:24px 30px;border-radius:24px');
+  const steps = [['graduation-cap', 'Ausbildung', ['ausbildung']], ['wrench', 'Meister', ['meister']], ['building', 'eigener Betrieb', ['betrieb']]];
+  way.innerHTML = '<div class="tiny" style="letter-spacing:.16em;color:#ffb547">ZAMIRS WEG · SZENARIO</div><div class="col st" style="gap:12px;margin-top:16px"></div>';
+  const col = way.querySelector('.st');
+  revealUp(tl, way, S.cue('c3', ['ausbildung']) - .4, { y: 18 });
+  steps.forEach(([ic, label, q]) => {
+    const st = el('div', { cls: 'row', css: 'gap:14px;font:700 30px var(--sans);white-space:nowrap', html: `${icon(ic, 34, '#ffb547', 1.9)}${label}` }, col);
+    tl.fromTo(st, { opacity: .15, x: -8 }, { opacity: 1, x: 0, duration: .3 }, S.cue('c3', q) - .1);
+  });
+  sfx(S.cue('c3', ['ausbildung']) - .2, 'blip', .4);
   tl.to(stat, { opacity: 0, x: 80, filter: 'blur(6px)', duration: .5, ease: 'power2.in' }, tN - .2);
   sfx(tR, 'impact', .55);
 }

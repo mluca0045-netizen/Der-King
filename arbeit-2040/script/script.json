@@ -9,18 +9,15 @@
       "leadIn": 2.6,
       "tail": 1.0,
       "lines": [
-        {
-          "id": "intro1",
-          "speaker": "lea",
-          "tts": "Hallo, Jahrgang zweitausendsechsundzwanzig! Hier ist Lea. Ich bin zweiunddreißig und lebe im Jahr zweitausendvierzig.",
-          "sub": "Hallo, Jahrgang 2026! Hier ist Lea. Ich bin 32 und lebe im Jahr 2040."
-        },
-        {
-          "id": "intro2",
-          "speaker": "lea",
-          "tts": "Ich zeige euch, wie wir arbeiten. Und was ihr heute schon davon beeinflussen könnt.",
-          "sub": "Ich zeige euch, wie wir arbeiten. Und was ihr heute schon davon beeinflussen könnt."
-        }
+        { "id": "intro1", "speaker": "luca",
+          "tts": "Hallo, Jahrgang zweitausendsechsundzwanzig! Hier ist Luca …",
+          "sub": "Hallo, Jahrgang 2026! Hier ist Luca …" },
+        { "id": "intro2", "speaker": "zamir", "gapBefore": 0.25,
+          "tts": "… und Samir. Wir sind zweiunddreißig und leben im Jahr zweitausendvierzig.",
+          "sub": "… und Zamir. Wir sind 32 und leben im Jahr 2040." },
+        { "id": "intro3", "speaker": "luca",
+          "tts": "Wir zeigen euch, wie wir arbeiten. Und was ihr heute schon davon beeinflussen könnt.",
+          "sub": "Wir zeigen euch, wie wir arbeiten. Und was ihr heute schon davon beeinflussen könnt." }
       ]
     },
     {
@@ -28,26 +25,32 @@
       "chapter": "01 · Ein Dienstag im Jahr 2040",
       "mode": "szenario",
       "leadIn": 1.2,
+      "tail": 0.5,
+      "lines": [
+        { "id": "nova1", "speaker": "nova",
+          "tts": "Guten Morgen, Luca. Deine Agenten haben über Nacht einundvierzig Aufgaben erledigt. Zwei Entscheidungen warten auf dich.",
+          "sub": "Guten Morgen, Luca. Deine Agenten haben über Nacht 41 Aufgaben erledigt. Zwei Entscheidungen warten auf dich." },
+        { "id": "s1a", "speaker": "luca",
+          "tts": "Mein Dienstag. Ich leite Projekte für Energiespeicher. Meine KI-Agenten schreiben Berichte und rechnen Angebote durch – ich entscheide und trage die Verantwortung.",
+          "sub": "Mein Dienstag. Ich leite Projekte für Energiespeicher. Meine KI-Agenten schreiben Berichte und rechnen Angebote durch – ich entscheide und trage die Verantwortung." },
+        { "id": "s1b", "speaker": "luca",
+          "tts": "Mein Team sitzt in Lissabon, Seoul und Leipzig. Ins Büro fahre ich zweimal pro Woche – zum Austausch. Und freitags habe ich frei.",
+          "sub": "Mein Team sitzt in Lissabon, Seoul und Leipzig. Ins Büro fahre ich zweimal pro Woche – zum Austausch. Und freitags habe ich frei." }
+      ]
+    },
+    {
+      "id": "scene2040z",
+      "chapter": "01 · Ein Dienstag im Jahr 2040",
+      "mode": "szenario",
+      "leadIn": 0.7,
       "tail": 0.8,
       "lines": [
-        {
-          "id": "nova1",
-          "speaker": "nova",
-          "tts": "Guten Morgen, Lea. Deine Agenten haben über Nacht einundvierzig Aufgaben erledigt. Zwei Entscheidungen warten auf dich.",
-          "sub": "Guten Morgen, Lea. Deine Agenten haben über Nacht 41 Aufgaben erledigt. Zwei Entscheidungen warten auf dich."
-        },
-        {
-          "id": "s1a",
-          "speaker": "lea",
-          "tts": "Mein Dienstag. Ich leite Projekte für Batteriespeicher. Meine KI-Agenten schreiben Berichte und rechnen Angebote durch – ich entscheide und trage die Verantwortung.",
-          "sub": "Mein Dienstag. Ich leite Projekte für Batteriespeicher. Meine KI-Agenten schreiben Berichte und rechnen Angebote durch – ich entscheide und trage die Verantwortung."
-        },
-        {
-          "id": "s1b",
-          "speaker": "lea",
-          "tts": "Mein Team sitzt in Lissabon, Seoul und Leipzig. Ins Büro fahre ich zweimal pro Woche – zum Austausch. Und freitags habe ich frei.",
-          "sub": "Mein Team sitzt in Lissabon, Seoul und Leipzig. Ins Büro fahre ich zweimal pro Woche – zum Austausch. Und freitags habe ich frei."
-        }
+        { "id": "s1c", "speaker": "zamir",
+          "tts": "Mein Dienstag sieht anders aus. Ich habe einen eigenen Meisterbetrieb für Solaranlagen und Wärmepumpen – um halb acht stehe ich auf dem ersten Dach.",
+          "sub": "Mein Dienstag sieht anders aus. Ich habe einen eigenen Meisterbetrieb für Solaranlagen und Wärmepumpen – um halb acht stehe ich auf dem ersten Dach." },
+        { "id": "s1d", "speaker": "zamir",
+          "tts": "Die KI-Brille zeigt mir, welches Bauteil spinnt. Reparieren und dafür geradestehen muss ich selbst. Homeoffice? Geht bei mir nicht. Dafür ist mein Auftragsbuch bis März voll.",
+          "sub": "Die KI-Brille zeigt mir, welches Bauteil spinnt. Reparieren und dafür geradestehen muss ich selbst. Homeoffice? Geht bei mir nicht. Dafür ist mein Auftragsbuch bis März voll." }
       ]
     },
     {
@@ -57,18 +60,12 @@
       "leadIn": 0.6,
       "tail": 0.7,
       "lines": [
-        {
-          "id": "h1",
-          "speaker": "lea",
+        { "id": "h1", "speaker": "zamir",
           "tts": "Wie es so weit kam? Nach Dampfmaschine, Fließband und Computer folgte Stufe vier: vernetzte Daten und künstliche Intelligenz.",
-          "sub": "Wie es so weit kam? Nach Dampfmaschine, Fließband und Computer folgte Stufe vier: vernetzte Daten und künstliche Intelligenz."
-        },
-        {
-          "id": "h2",
-          "speaker": "lea",
+          "sub": "Wie es so weit kam? Nach Dampfmaschine, Fließband und Computer folgte Stufe vier: vernetzte Daten und künstliche Intelligenz." },
+        { "id": "h2", "speaker": "luca",
           "tts": "Und das Wichtigste vorweg: KI ersetzt selten ganze Berufe. Sie übernimmt einzelne Tätigkeiten.",
-          "sub": "Und das Wichtigste vorweg: KI ersetzt selten ganze Berufe. Sie übernimmt einzelne Tätigkeiten."
-        }
+          "sub": "Und das Wichtigste vorweg: KI ersetzt selten ganze Berufe. Sie übernimmt einzelne Tätigkeiten." }
       ]
     },
     {
@@ -78,24 +75,18 @@
       "leadIn": 0.5,
       "tail": 0.7,
       "lines": [
-        {
-          "id": "j1",
-          "speaker": "lea",
+        { "id": "j1", "speaker": "luca",
           "tts": "Schon zweitausendzweiundzwanzig arbeiteten achtunddreißig Prozent der Beschäftigten in Berufen, deren Tätigkeiten zu über siebzig Prozent technisch ersetzbar waren.",
-          "sub": "Schon 2022 arbeiteten 38 % der Beschäftigten in Berufen, deren Tätigkeiten zu über 70 % technisch ersetzbar waren."
-        },
-        {
-          "id": "j2",
-          "speaker": "lea",
+          "sub": "Schon 2022 arbeiteten 38 % der Beschäftigten in Berufen, deren Tätigkeiten zu über 70 % technisch ersetzbar waren." },
+        { "id": "j2", "speaker": "zamir",
           "tts": "Trotzdem erwartete das Weltwirtschaftsforum bis zweitausenddreißig mehr neue Jobs als wegfallende. Und weil die Babyboomer in Rente gehen, fehlen eher Menschen als Jobs.",
-          "sub": "Trotzdem erwartete das Weltwirtschaftsforum bis 2030 mehr neue Jobs als wegfallende. Und weil die Babyboomer in Rente gehen, fehlen eher Menschen als Jobs."
-        },
-        {
-          "id": "j3",
-          "speaker": "lea",
-          "tts": "Die Ärztin lässt Röntgenbilder von der KI vorsortieren und hat mehr Zeit für Gespräche. Und Pflege, Handwerk und Energiewende suchen händeringend Leute.",
-          "sub": "Die Ärztin lässt Röntgenbilder von der KI vorsortieren und hat mehr Zeit für Gespräche. Und Pflege, Handwerk und Energiewende suchen händeringend Leute."
-        }
+          "sub": "Trotzdem erwartete das Weltwirtschaftsforum bis 2030 mehr neue Jobs als wegfallende. Und weil die Babyboomer in Rente gehen, fehlen eher Menschen als Jobs." },
+        { "id": "j3", "speaker": "luca",
+          "tts": "Die Ärztin lässt Röntgenbilder von der KI vorsortieren und hat mehr Zeit für Gespräche.",
+          "sub": "Die Ärztin lässt Röntgenbilder von der KI vorsortieren und hat mehr Zeit für Gespräche." },
+        { "id": "j4", "speaker": "zamir",
+          "tts": "Und Pflege, Handwerk und Energiewende suchen händeringend Leute. Ich könnte sofort drei einstellen.",
+          "sub": "Und Pflege, Handwerk und Energiewende suchen händeringend Leute. Ich könnte sofort drei einstellen." }
       ]
     },
     {
@@ -105,24 +96,15 @@
       "leadIn": 0.5,
       "tail": 0.7,
       "lines": [
-        {
-          "id": "p1",
-          "speaker": "lea",
+        { "id": "p1", "speaker": "luca",
           "tts": "Auch der Arbeitsort hat sich verändert. Vor Corona arbeiteten etwa fünf Prozent zu Hause – ab zweitausendzweiundzwanzig stabil ein Viertel.",
-          "sub": "Auch der Arbeitsort hat sich verändert. Vor Corona arbeiteten etwa 5 % zu Hause – ab 2022 stabil ein Viertel."
-        },
-        {
-          "id": "p2",
-          "speaker": "lea",
+          "sub": "Auch der Arbeitsort hat sich verändert. Vor Corona arbeiteten etwa 5 % zu Hause – ab 2022 stabil ein Viertel." },
+        { "id": "p2", "speaker": "luca",
           "tts": "Das ifo Institut prognostizierte deshalb: In den sieben größten Städten wird langfristig rund zwölf Prozent weniger Bürofläche gebraucht.",
-          "sub": "Das ifo Institut prognostizierte deshalb: In den sieben größten Städten wird langfristig rund 12 % weniger Bürofläche gebraucht."
-        },
-        {
-          "id": "p3",
-          "speaker": "lea",
+          "sub": "Das ifo Institut prognostizierte deshalb: In den sieben größten Städten wird langfristig rund 12 % weniger Bürofläche gebraucht." },
+        { "id": "p3", "speaker": "zamir",
           "tts": "Büros wurden zu Treffpunkten. Und leere Bürotürme werden nur selten zu bezahlbaren Wohnungen.",
-          "sub": "Büros wurden zu Treffpunkten. Und leere Bürotürme werden nur selten zu bezahlbaren Wohnungen."
-        }
+          "sub": "Büros wurden zu Treffpunkten. Und leere Bürotürme werden nur selten zu bezahlbaren Wohnungen." }
       ]
     },
     {
@@ -132,24 +114,15 @@
       "leadIn": 0.5,
       "tail": 0.7,
       "lines": [
-        {
-          "id": "m1",
-          "speaker": "lea",
-          "tts": "Aktientipps aus der Zukunft gibt es von mir nicht. Aber ein Muster: Die Börse reagiert zuerst.",
-          "sub": "Aktientipps aus der Zukunft gibt es von mir nicht. Aber ein Muster: Die Börse reagiert zuerst."
-        },
-        {
-          "id": "m2",
-          "speaker": "lea",
+        { "id": "m1", "speaker": "luca",
+          "tts": "Aktientipps aus der Zukunft gibt es von uns nicht. Aber ein Muster: Die Börse reagiert zuerst.",
+          "sub": "Aktientipps aus der Zukunft gibt es von uns nicht. Aber ein Muster: Die Börse reagiert zuerst." },
+        { "id": "m2", "speaker": "zamir",
           "tts": "Weil alle KI-Rechenzentren bauen wollten, war Nvidia zweitausendfünfundzwanzig als erstes Unternehmen über vier Billionen Dollar wert. Die Zoom-Aktie dagegen explodierte im Homeoffice-Hype – und verlor danach über achtzig Prozent.",
-          "sub": "Weil alle KI-Rechenzentren bauen wollten, war Nvidia 2025 als erstes Unternehmen über 4 Billionen Dollar wert. Die Zoom-Aktie dagegen explodierte im Homeoffice-Hype – und verlor danach über 80 %."
-        },
-        {
-          "id": "m3",
-          "speaker": "lea",
+          "sub": "Weil alle KI-Rechenzentren bauen wollten, war Nvidia 2025 als erstes Unternehmen über 4 Billionen Dollar wert. Die Zoom-Aktie dagegen explodierte im Homeoffice-Hype – und verlor danach über 80 %." },
+        { "id": "m3", "speaker": "luca",
           "tts": "Gehandelt wird immer schneller, zunehmend von Algorithmen. Und immer mehr junge Menschen investieren: Zweitausendfünfundzwanzig besaß jeder Fünfte in Deutschland Aktien oder Fonds.",
-          "sub": "Gehandelt wird immer schneller, zunehmend von Algorithmen. Und immer mehr junge Menschen investieren: 2025 besaß jeder Fünfte in Deutschland Aktien oder Fonds."
-        }
+          "sub": "Gehandelt wird immer schneller, zunehmend von Algorithmen. Und immer mehr junge Menschen investieren: 2025 besaß jeder Fünfte in Deutschland Aktien oder Fonds." }
       ]
     },
     {
@@ -159,18 +132,12 @@
       "leadIn": 0.5,
       "tail": 0.7,
       "lines": [
-        {
-          "id": "pr1",
-          "speaker": "lea",
-          "tts": "Privat heißt das: weniger Pendeln, mehr Zeit für Familie und Freunde. In einem deutschen Pilotprojekt zur Vier-Tage-Woche stieg die Lebenszufriedenheit – bei gleicher Produktivität.",
-          "sub": "Privat heißt das: weniger Pendeln, mehr Zeit für Familie und Freunde. In einem deutschen Pilotprojekt zur Vier-Tage-Woche stieg die Lebenszufriedenheit – bei gleicher Produktivität."
-        },
-        {
-          "id": "pr2",
-          "speaker": "lea",
+        { "id": "pr1", "speaker": "luca",
+          "tts": "Privat heißt das für mich: weniger Pendeln, mehr Zeit für Familie und Freunde. In einem deutschen Pilotprojekt zur Vier-Tage-Woche stieg die Lebenszufriedenheit – bei gleicher Produktivität.",
+          "sub": "Privat heißt das für mich: weniger Pendeln, mehr Zeit für Familie und Freunde. In einem deutschen Pilotprojekt zur Vier-Tage-Woche stieg die Lebenszufriedenheit – bei gleicher Produktivität." },
+        { "id": "pr2", "speaker": "zamir",
           "tts": "Aber wenn das Büro im Wohnzimmer steht, verschwimmen die Grenzen. Dauer-Erreichbarkeit und Einsamkeit sind die Kehrseite. Abschalten ist bei uns keine Schwäche, sondern eine Fähigkeit.",
-          "sub": "Aber wenn das Büro im Wohnzimmer steht, verschwimmen die Grenzen. Dauer-Erreichbarkeit und Einsamkeit sind die Kehrseite. Abschalten ist bei uns keine Schwäche, sondern eine Fähigkeit."
-        }
+          "sub": "Aber wenn das Büro im Wohnzimmer steht, verschwimmen die Grenzen. Dauer-Erreichbarkeit und Einsamkeit sind die Kehrseite. Abschalten ist bei uns keine Schwäche, sondern eine Fähigkeit." }
       ]
     },
     {
@@ -180,24 +147,15 @@
       "leadIn": 0.5,
       "tail": 0.7,
       "lines": [
-        {
-          "id": "c1",
-          "speaker": "lea",
+        { "id": "c1", "speaker": "luca",
           "tts": "Am härtesten ist der Einstieg. Denn KI erledigt genau die Aufgaben, an denen Berufsanfänger früher gelernt haben.",
-          "sub": "Am härtesten ist der Einstieg. Denn KI erledigt genau die Aufgaben, an denen Berufsanfänger früher gelernt haben."
-        },
-        {
-          "id": "c2",
-          "speaker": "lea",
+          "sub": "Am härtesten ist der Einstieg. Denn KI erledigt genau die Aufgaben, an denen Berufsanfänger früher gelernt haben." },
+        { "id": "c2", "speaker": "luca",
           "tts": "Laut einer Stanford-Studie sank in den USA in stark KI-betroffenen Berufen die Beschäftigung der Zweiundzwanzig- bis Fünfundzwanzigjährigen um sechzehn Prozent. Der Karriereleiter fehlt die unterste Sprosse.",
-          "sub": "Laut einer Stanford-Studie sank in den USA in stark KI-betroffenen Berufen die Beschäftigung der 22- bis 25-Jährigen um 16 %. Der Karriereleiter fehlt die unterste Sprosse."
-        },
-        {
-          "id": "c3",
-          "speaker": "lea",
-          "tts": "Aufsteigen kann, wer früh echte Projekte macht und nie aufhört zu lernen. Denn Verantwortung übernehmen kann keine Maschine.",
-          "sub": "Aufsteigen kann, wer früh echte Projekte macht und nie aufhört zu lernen. Denn Verantwortung übernehmen kann keine Maschine."
-        }
+          "sub": "Laut einer Stanford-Studie sank in den USA in stark KI-betroffenen Berufen die Beschäftigung der 22- bis 25-Jährigen um 16 %. Der Karriereleiter fehlt die unterste Sprosse." },
+        { "id": "c3", "speaker": "zamir",
+          "tts": "Aufsteigen kann, wer früh echte Projekte macht und nie aufhört zu lernen. Bei mir hieß das: Ausbildung, Meister, eigener Betrieb. Denn Verantwortung übernehmen kann keine Maschine.",
+          "sub": "Aufsteigen kann, wer früh echte Projekte macht und nie aufhört zu lernen. Bei mir hieß das: Ausbildung, Meister, eigener Betrieb. Denn Verantwortung übernehmen kann keine Maschine." }
       ]
     },
     {
@@ -207,24 +165,15 @@
       "leadIn": 0.5,
       "tail": 0.7,
       "lines": [
-        {
-          "id": "w1",
-          "speaker": "lea",
+        { "id": "w1", "speaker": "luca",
           "tts": "Und wer wird reicher? Vor allem die, denen die Maschinen gehören. Der Internationale Währungsfonds warnte schon zweitausendvierundzwanzig: KI dürfte die Ungleichheit verschärfen.",
-          "sub": "Und wer wird reicher? Vor allem die, denen die Maschinen gehören. Der Internationale Währungsfonds warnte schon 2024: KI dürfte die Ungleichheit verschärfen."
-        },
-        {
-          "id": "w2",
-          "speaker": "lea",
+          "sub": "Und wer wird reicher? Vor allem die, denen die Maschinen gehören. Der Internationale Währungsfonds warnte schon 2024: KI dürfte die Ungleichheit verschärfen." },
+        { "id": "w2", "speaker": "zamir",
           "tts": "In Deutschland besitzen die reichsten zehn Prozent mehr als die Hälfte des Vermögens. Laut OECD kann der Aufstieg aus einer einkommensschwachen Familie sechs Generationen dauern.",
-          "sub": "In Deutschland besitzen die reichsten 10 % mehr als die Hälfte des Vermögens. Laut OECD kann der Aufstieg aus einer einkommensschwachen Familie sechs Generationen dauern."
-        },
-        {
-          "id": "w3",
-          "speaker": "lea",
-          "tts": "Und Homeoffice ist ein Privileg: Wer pflegt, baut oder verkauft, arbeitet nicht vom Sofa aus.",
-          "sub": "Und Homeoffice ist ein Privileg: Wer pflegt, baut oder verkauft, arbeitet nicht vom Sofa aus."
-        }
+          "sub": "In Deutschland besitzen die reichsten 10 % mehr als die Hälfte des Vermögens. Laut OECD kann der Aufstieg aus einer einkommensschwachen Familie sechs Generationen dauern." },
+        { "id": "w3", "speaker": "zamir",
+          "tts": "Und Homeoffice ist ein Privileg: Wer pflegt, baut oder – wie ich – Anlagen installiert, arbeitet nicht vom Sofa aus.",
+          "sub": "Und Homeoffice ist ein Privileg: Wer pflegt, baut oder – wie ich – Anlagen installiert, arbeitet nicht vom Sofa aus." }
       ]
     },
     {
@@ -234,24 +183,15 @@
       "leadIn": 0.5,
       "tail": 0.8,
       "lines": [
-        {
-          "id": "r1",
-          "speaker": "lea",
+        { "id": "r1", "speaker": "luca",
           "tts": "Wie wird man also reich? Selten durch Gehalt allein – sondern durch Eigentum und Zeit.",
-          "sub": "Wie wird man also reich? Selten durch Gehalt allein – sondern durch Eigentum und Zeit."
-        },
-        {
-          "id": "r2",
-          "speaker": "lea",
+          "sub": "Wie wird man also reich? Selten durch Gehalt allein – sondern durch Eigentum und Zeit." },
+        { "id": "r2", "speaker": "luca",
           "tts": "Wer ab sechzehn jeden Monat fünfzig Euro breit gestreut anlegt, könnte bei sechs Prozent Rendite mit siebenundsechzig rund zweihunderttausend Euro haben. Wer erst mit sechsunddreißig startet: gut fünfzigtausend. Garantiert ist das nicht.",
-          "sub": "Wer ab 16 jeden Monat 50 € breit gestreut anlegt, könnte bei 6 % Rendite mit 67 rund 200.000 € haben. Wer erst mit 36 startet: gut 50.000 €. Garantiert ist das nicht."
-        },
-        {
-          "id": "r3",
-          "speaker": "lea",
-          "tts": "Zweitens: Lernt, was KI ergänzt. Drittens: KI macht Gründen billiger – aber für jede Erfolgsstory gibt es viele, die scheitern.",
-          "sub": "Zweitens: Lernt, was KI ergänzt. Drittens: KI macht Gründen billiger – aber für jede Erfolgsstory gibt es viele, die scheitern."
-        }
+          "sub": "Wer ab 16 jeden Monat 50 € breit gestreut anlegt, könnte bei 6 % Rendite mit 67 rund 200.000 € haben. Wer erst mit 36 startet: gut 50.000 €. Garantiert ist das nicht." },
+        { "id": "r3", "speaker": "zamir",
+          "tts": "Zweitens: Lernt, was KI ergänzt. Drittens: Gründen. KI macht es billiger, ich habe es gewagt – aber für jede Erfolgsstory gibt es viele, die scheitern.",
+          "sub": "Zweitens: Lernt, was KI ergänzt. Drittens: Gründen. KI macht es billiger, ich habe es gewagt – aber für jede Erfolgsstory gibt es viele, die scheitern." }
       ]
     },
     {
@@ -261,18 +201,15 @@
       "leadIn": 0.8,
       "tail": 4.5,
       "lines": [
-        {
-          "id": "o1",
-          "speaker": "lea",
+        { "id": "o1", "speaker": "luca",
           "tts": "Unser zweitausendvierzig ist nicht vom Himmel gefallen. Es ist das Ergebnis eurer Entscheidungen: in der Schule, im ersten Job, an der Wahlurne.",
-          "sub": "Unser 2040 ist nicht vom Himmel gefallen. Es ist das Ergebnis eurer Entscheidungen: in der Schule, im ersten Job, an der Wahlurne."
-        },
-        {
-          "id": "o2",
-          "speaker": "lea",
-          "tts": "Die Zukunft der Arbeit ist kein Schicksal. Wir sehen uns!",
-          "sub": "Die Zukunft der Arbeit ist kein Schicksal. Wir sehen uns!"
-        }
+          "sub": "Unser 2040 ist nicht vom Himmel gefallen. Es ist das Ergebnis eurer Entscheidungen: in der Schule, im ersten Job, an der Wahlurne." },
+        { "id": "o2", "speaker": "zamir",
+          "tts": "Die Zukunft der Arbeit ist kein Schicksal.",
+          "sub": "Die Zukunft der Arbeit ist kein Schicksal." },
+        { "id": "o3", "speaker": "luca", "gapBefore": 0.3,
+          "tts": "Wir sehen uns!",
+          "sub": "Wir sehen uns!" }
       ]
     },
     {

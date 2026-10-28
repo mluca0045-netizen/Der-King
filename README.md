@@ -2,7 +2,7 @@
 
 ## Arbeit 4.0 – Eine Nachricht aus dem Jahr 2040
 
-Animiertes Erklärvideo (4:45 min, Full HD, mit Stimme, Musik und Untertiteln) für einen Oberstufen-Wettbewerb: Eine Zukunftsszene aus dem Jahr 2040 zeigt, wie sich das Arbeitsleben verändert haben wird – mit KI und Jobs, Homeoffice und Büroimmobilien, Börse und Handel, Privatleben, Aufstiegschancen, Arm und Reich und der Frage „Wie wird man reich?“.
+Animiertes Erklärvideo (5:30 min, Full HD, mit zwei Sprechern, Musik und Untertiteln) für einen Oberstufen-Wettbewerb: In einer Zukunftsszene aus dem Jahr 2040 erzählen Luca (Projektleitung mit KI-Agenten, viel Homeoffice) und Zamir (eigener Elektro-Meisterbetrieb, Arbeit vor Ort) im Wechsel, wie sich das Arbeitsleben verändert haben wird – mit KI und Jobs, Homeoffice und Büroimmobilien, Börse und Handel, Privatleben, Aufstiegschancen, Arm und Reich und der Frage „Wie wird man reich?“.
 
 - Video: [`arbeit-2040/output/`](arbeit-2040/output/)
 - Drehbuch, Sprechertext und Quellen: [`arbeit-2040/DREHBUCH.md`](arbeit-2040/DREHBUCH.md)

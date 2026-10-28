@@ -39,8 +39,8 @@ ffmpeg -hide_banner -nostats -y -framerate 30 -i build/frames/f_%06d.jpg -i buil
   "output/${NAME}.mp4"
 
 # Version mit eingebrannten Untertiteln: Bild auf 87,5 % verkleinert über weichgezeichnetem Rand,
-# Untertitel im frei werdenden unteren Streifen – so verdecken sie keine Bildinhalte
-SUBS="subtitles=build/untertitel.srt:force_style='FontName=Inter,FontSize=10.5,PrimaryColour=&H00FFFFFF,BorderStyle=1,Outline=1.3,OutlineColour=&H90000000,Shadow=0,MarginV=6'"
+# Untertitel im frei werdenden unteren Streifen – so verdecken sie keine Bildinhalte; Farbe je Sprecher
+SUBS="subtitles=build/untertitel_farbig.srt:force_style='FontName=Inter,FontSize=10.5,PrimaryColour=&H00FFFFFF,BorderStyle=1,Outline=1.3,OutlineColour=&H90000000,Shadow=0,MarginV=6'"
 ffmpeg -hide_banner -nostats -y -framerate 30 -i build/frames/f_%06d.jpg -i build/audio/mix_norm.wav \
   -filter_complex "[0:v]split[a][b];[a]boxblur=28:2,eq=brightness=-0.06[bg];[b]scale=1680:945:flags=lanczos[fg];[bg][fg]overlay=120:8,${SUBS},${VF}[v]" \
   -map "[v]" -map 1:a $ENC \

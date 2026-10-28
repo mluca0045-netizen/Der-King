@@ -1,7 +1,7 @@
 // Kapitel 3: KI und Jobs – Substituierbarkeit, WEF-Prognose, Demografie, Berufe im Wandel
 function S03(tl, S) {
   const root = makeScene('jobs');
-  const j1 = S.L('j1'), j2 = S.L('j2'), j3 = S.L('j3');
+  const j1 = S.L('j1'), j2 = S.L('j2'), j3 = S.L('j3'), j4 = S.L('j4');
   sceneInOut(tl, root, S);
 
   // --- j1: 38 % ---
@@ -113,11 +113,14 @@ function S03(tl, S) {
   const jobCards = jobs.map(([ic, name, q, note], i) => {
     const c = box(Cc, 1200, 190 + i * 222, 570, 196, 'glass tint-mint', '', 'display:flex;align-items:center;gap:30px;padding:0 40px;');
     c.innerHTML = `${icon(ic, 70, '#41f0a6', 1.7)}<div><div class="row" style="gap:16px"><span style="font:800 46px var(--display)">${name}</span><span class="badge chip mint" style="font-size:16px;padding:6px 12px"><span class="dot"></span>Gesucht</span></div><div class="tiny" style="margin-top:10px;font-size:21px">${note}</div></div>`;
-    const t = S.cue('j3', q) - .15;
+    const t = S.cue('j4', q) - .15;
     tl.fromTo(c, { opacity: 0, x: 80, filter: 'blur(8px)' }, { opacity: 1, x: 0, filter: 'blur(0px)', duration: .6, ease: 'power3.out' }, t);
     tl.fromTo(c.querySelector('.badge'), { scale: .6, opacity: 0 }, { scale: 1, opacity: 1, duration: .4, ease: 'back.out(3)' }, t + .3);
     sfx(t, 'pop', .45);
     return c;
   });
+  const hire = box(Cc, 1200, 860, 570, 50, '', `<span class="chip amber" style="font-size:17px">${icon('hard-hat', 20, '#ffb547', 2)} Zamirs Betrieb: 3 offene Stellen</span>`);
+  revealUp(tl, hire, S.cue('j4', ['einstellen', 'sofort']) - .3, { y: 10 });
+  sfx(S.cue('j4', ['einstellen', 'sofort']) - .2, 'blip', .4);
   source(j3.start, S.end - .2, 'Idee „Traumberufe“: <b>neuneinhalb (WDR)</b> · <b>BA</b>-Engpassanalyse · <b>KOFA/IW</b> 2022 (Solar & Wind)');
 }

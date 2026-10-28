@@ -20,11 +20,18 @@ from qwen_tts import Qwen3TTSModel
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VOICES = {
-    "lea": {
-        "wav": os.path.join(ROOT, "tts/voices/lea_ref.wav"),
-        "text": "Hallo! Ich bin Lea und erzähle euch heute, wie sich unsere Arbeitswelt verändert hat. "
+    "luca": {
+        "wav": os.path.join(ROOT, "tts/voices/luca_ref.wav"),
+        "text": "Hallo! Ich bin Luca und erzähle euch heute, wie sich unsere Arbeitswelt verändert hat. "
                 "Manches davon klingt verrückt – aber vieles hat schon bei euch angefangen.",
     },
+    # Schreibweise „Samir“: so spricht die deutsche Stimme den Namen Zamir mit weichem S statt „Tsamir“
+    "zamir": {
+        "wav": os.path.join(ROOT, "tts/voices/zamir_ref.wav"),
+        "text": "Hallo! Ich bin Samir. Ich habe einen eigenen Meisterbetrieb und zeige euch, "
+                "wie Arbeit im Jahr zweitausendvierzig aussieht – direkt von der Baustelle.",
+    },
+    # Der Referenztext muss exakt zur Referenzaufnahme passen (sie entstand mit dem früheren Namen).
     "nova": {
         "wav": os.path.join(ROOT, "tts/voices/nova_ref.wav"),
         "text": "Guten Morgen, Lea. Deine Agenten haben über Nacht einundvierzig Aufgaben erledigt. "

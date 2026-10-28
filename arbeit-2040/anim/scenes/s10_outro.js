@@ -1,7 +1,7 @@
-// Schluss: zurück in Leas 2040 – die Zukunft ist eine Entscheidung
+// Schluss: zurück im Jahr 2040 – die Zukunft ist eine Entscheidung
 function S10(tl, S) {
   const root = makeScene('outro');
-  const o1 = S.L('o1'), o2 = S.L('o2');
+  const o1 = S.L('o1'), o2 = S.L('o2'), o3 = S.L('o3');
   sceneInOut(tl, root, S, { drift: false, tout: S.end - .9, dout: .9 });
 
   const winWrap = box(root, 0, 0, 1920, 1080);
@@ -32,10 +32,10 @@ function S10(tl, S) {
   revealUp(tl, fin.children, tE + .05, { stagger: .25, y: 36 });
   sfx(tE + .25, 'impact', .7);
   const see = box(root, 0, 660, 1920, 60, 'center mono', 'Wir sehen uns.', 'font-size:30px;color:#ffd0b8;letter-spacing:.3em;text-transform:uppercase');
-  revealUp(tl, see, S.cue('o2', ['sehen']) - .2, { y: 10 });
+  revealUp(tl, see, o3.start - .1, { y: 10 });
 
   // Endkarte
-  const tEnd = o2.end + .5;
+  const tEnd = o3.end + .5;
   tl.to([fin, see], { opacity: 0, scale: .96, duration: .6, ease: 'power2.in' }, tEnd);
   const logo = box(root, 0, 380, 1920, 320, 'center');
   logo.innerHTML = '<div class="h-xxl" style="font-size:180px;letter-spacing:-.01em">ARBEIT <span class="grad">4.0</span></div>' +
@@ -70,7 +70,7 @@ function S11(tl, S) {
   ];
   const list = box(root, 150, 210, 1620, 640, '', '', 'columns:2;column-gap:70px');
   list.innerHTML = srcs.map(s => `<div style="font:500 21px/1.4 var(--sans);color:#c9d6f2;margin-bottom:14px;break-inside:avoid">${s}</div>`).join('');
-  const prod = box(root, 150, 880, 1620, 80, '', '<div class="tiny" style="font-size:19px;line-height:1.6">Zukunftsszene 2040: fiktiv · Zahlen: Stand Oktober 2026 · Stimmen: KI-generiert (Qwen3-TTS, Apache-2.0) · Musik &amp; Klänge: eigens synthetisiert · Animation: HTML/GSAP · Icons: Lucide (ISC) · Karte: Natural Earth</div>');
+  const prod = box(root, 150, 880, 1620, 80, '', '<div class="tiny" style="font-size:19px;line-height:1.6">Zukunftsszene 2040 mit Luca &amp; Zamir: fiktiv · Zahlen: Stand Oktober 2026 · Stimmen: KI-generiert (Qwen3-TTS, Apache-2.0) · Musik &amp; Klänge: eigens synthetisiert · Animation: HTML/GSAP · Icons: Lucide (ISC) · Karte: Natural Earth</div>');
   revealUp(tl, h, S.start + .2, { y: 12 });
   revealUp(tl, list.children, S.start + .4, { y: 12, stagger: .05, d: .5 });
   revealUp(tl, prod, S.start + 1.4, { y: 10 });

@@ -123,10 +123,10 @@ function S08(tl, S) {
     '<div class="num c-cyan" style="font-size:84px;margin-top:20px">bis 70 %</div><div class="tiny">Homeoffice-Anteil in Spitzenbranchen</div>';
   const right = box(Cc, 1010, 340, 760, 460, 'glass tint-coral', '', 'padding:40px 46px');
   right.innerHTML = '<div class="row items" style="gap:26px"></div>' +
-    '<div style="font:800 46px var(--display);margin-top:24px">Pflege · Bau · Verkauf</div><div class="body" style="font-size:30px;margin-top:8px">Arbeit, die vor Ort passiert</div>' +
+    '<div style="font:800 46px var(--display);margin-top:24px">Pflege · Bau · Installation</div><div class="body" style="font-size:30px;margin-top:8px">Arbeit, die vor Ort passiert</div>' +
     '<div class="num c-coral" style="font-size:84px;margin-top:20px">kaum</div><div class="tiny">Homeoffice möglich</div>';
   const items = right.querySelector('.items');
-  const its = [['hand-heart', ['pflegt']], ['hard-hat', ['baut']], ['store', ['verkauft']]].map(([ic, q]) => {
+  const its = [['hand-heart', ['pflegt']], ['hard-hat', ['baut']], ['zap', ['installiert', 'anlagen']]].map(([ic, q]) => {
     const e = el('span', { html: icon(ic, 64, '#ff8da1', 1.7) }, items);
     popIn(tl, e, S.cue('w3', q) - .1, { from: .4 });
     return e;

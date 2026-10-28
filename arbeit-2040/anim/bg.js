@@ -7,6 +7,7 @@ const BG = {
 const THEMES = {
   intro: { a: [59, 227, 255], b: [139, 108, 255], c: [36, 64, 180] },
   scene2040: { a: [255, 160, 90], b: [139, 108, 255], c: [40, 110, 220] },
+  scene2040z: { a: [255, 181, 71], b: [59, 227, 255], c: [60, 90, 200] },
   history: { a: [76, 141, 255], b: [139, 108, 255], c: [59, 227, 255] },
   jobs: { a: [59, 227, 255], b: [65, 240, 166], c: [50, 80, 200] },
   place: { a: [76, 141, 255], b: [59, 227, 255], c: [120, 90, 255] },
@@ -116,17 +117,38 @@ const THEMES = {
   const wave = document.getElementById('wave').getContext('2d');
   let lastChap = null, lastMode = null, lastSrc = null;
   const ramp = (t, a, b, f = .45) => clamp(Math.min((t - a) / f, (b - t) / f));
+  // aufeinanderfolgende Szenen mit gleichem Kapitel/Modus bilden einen durchgehenden Abschnitt
+  const runs = key => {
+    const out = {};
+    TL.scenes.forEach((sc, i) => {
+      let a = i, b = i;
+      while (a > 0 && TL.scenes[a - 1][key] === sc[key]) a--;
+      while (b < TL.scenes.length - 1 && TL.scenes[b + 1][key] === sc[key]) b++;
+      out[sc.id] = { start: TL.scenes[a].start, end: TL.scenes[b].end };
+    });
+    return out;
+  };
+  const chapRun = runs('chapter'), modeRun = runs('mode');
+  const SPK = {
+    luca: { name: 'LUCA', rgb: '59,227,255' },
+    zamir: { name: 'ZAMIR', rgb: '255,181,71' },
+    nova: { name: 'NOVA', rgb: '179,161,255' },
+  };
+  const lines = TL.scenes.flatMap(sc => sc.lines);
+  const spk = document.getElementById('hud-spk');
+  let lastSpk = null;
 
   FRAME.push(t => {
     const sc = TL.scenes.find(s => t >= s.start && t < s.end) || TL.scenes[TL.scenes.length - 1];
     // Kapitel
     let ca = 0;
     if (sc.chapter) {
-      ca = ramp(t, sc.start + .5, sc.end - .2, .5);
-      if (lastChap !== sc.id) {
+      const r = chapRun[sc.id];
+      ca = ramp(t, r.start + .5, r.end - .2, .5);
+      if (lastChap !== sc.chapter) {
         const [n, ...rest] = sc.chapter.split(' · ');
         chapNum.textContent = 'KAPITEL ' + n; chapTitle.textContent = rest.join(' · ');
-        lastChap = sc.id;
+        lastChap = sc.chapter;
       }
     }
     chap.style.opacity = ca.toFixed(3);
@@ -138,12 +160,24 @@ const THEMES = {
       mode.innerHTML = '<span class="dot"></span>' + (md === 'fakt' ? 'Fakten · Stand 2026' : 'Szenario 2040');
       lastMode = md;
     }
-    mode.style.opacity = ramp(t, sc.start + .35, sc.end - .1, .45).toFixed(3);
-    // Nachricht + Wellenform
+    const mr = modeRun[sc.id];
+    mode.style.opacity = ramp(t, mr.start + .35, mr.end - .1, .45).toFixed(3);
+    // Nachricht, Sprecher und Wellenform
     const ma = ramp(t, 3.2, TL.duration - 3.5, .8);
     msg.style.opacity = (ma * .95).toFixed(3);
     prog.style.opacity = (ramp(t, TL.scenes[1].start, TL.duration - 3.5, 1) * .9).toFixed(3);
     bar.style.transform = `scaleX(${clamp(t / TL.duration).toFixed(4)})`;
+    let cur = null;
+    for (const l of lines) if (t >= l.start - .15 && t < l.end + .6) cur = l;
+    const who = cur ? cur.speaker : null;
+    if (who && who !== lastSpk) {
+      spk.textContent = SPK[who].name;
+      spk.style.color = `rgb(${SPK[who].rgb})`;
+      spk.style.borderColor = `rgba(${SPK[who].rgb},.7)`;
+      lastSpk = who;
+    }
+    spk.style.opacity = (cur ? ramp(t, cur.start - .15, cur.end + .6, .2) : 0).toFixed(3);
+    const rgb = SPK[lastSpk || 'luca'].rgb;
     wave.clearRect(0, 0, 300, 44);
     const n = 36;
     for (let i = 0; i < n; i++) {
@@ -151,7 +185,7 @@ const THEMES = {
       const jit = .55 + .45 * Math.abs(Math.sin(i * 1.93 + t * 11.3));
       const h = Math.max(2.5, lv * 40 * jit);
       const a = .35 + .65 * (i / n);
-      wave.fillStyle = `rgba(59,227,255,${a.toFixed(2)})`;
+      wave.fillStyle = `rgba(${rgb},${a.toFixed(2)})`;
       wave.fillRect(i * 8.3, 22 - h / 2, 4.2, h);
     }
     // Quellenzeile

@@ -8,7 +8,7 @@
 
   const tl = gsap.timeline({ paused: true });
   const builders = {
-    intro: window.S00, scene2040: window.S01, history: window.S02, jobs: window.S03, place: window.S04,
+    intro: window.S00, scene2040: window.S01, scene2040z: window.S01Z, history: window.S02, jobs: window.S03, place: window.S04,
     market: window.S05, private: window.S06, career: window.S07, wealth: window.S08, rich: window.S09,
     outro: window.S10, credits: window.S11,
   };

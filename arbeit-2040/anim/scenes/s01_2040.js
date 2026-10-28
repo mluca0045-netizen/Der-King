@@ -22,7 +22,7 @@ function S01(tl, S) {
   box(panel, 164, 46, 300, 40, '', '<span style="font:800 34px var(--display);letter-spacing:.02em">NOVA</span>');
   box(panel, 164, 90, 420, 30, 'tiny', 'KI-ASSISTENZ · ONLINE', 'letter-spacing:.16em;color:var(--cyan);white-space:nowrap');
   box(panel, 440, 50, 160, 40, 'mono', '07:31', 'font-size:32px;font-weight:600;text-align:right;color:var(--ink2)');
-  const greet = box(panel, 40, 178, 560, 60, 'h-sm', 'Guten Morgen, Lea.', 'font-size:46px');
+  const greet = box(panel, 40, 178, 560, 60, 'h-sm', 'Guten Morgen, Luca.', 'font-size:46px');
   const row = (y, ic, col, big, small) => {
     const r = box(panel, 40, y, 560, 112, 'glass', '', 'border-radius:22px;display:flex;align-items:center;gap:22px;padding:0 26px;');
     r.innerHTML = icon(ic, 46, col, 2) + `<div><div style="font:700 32px var(--sans)">${big}</div><div class="tiny" style="margin-top:4px">${small}</div></div>`;
@@ -56,9 +56,9 @@ function S01(tl, S) {
   tl.to(panel, { x: 120, opacity: 0, filter: 'blur(8px)', duration: .6, ease: 'power2.in' }, tA);
   tl.to(dim, { opacity: 1, duration: .8 }, tA);
   const prof = box(root, 200, 170, 900, 120, 'row', '', 'gap:28px;');
-  prof.innerHTML = '<div style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#3be3ff,#8b6cff);display:flex;align-items:center;justify-content:center;font:800 42px var(--display);box-shadow:0 0 40px rgba(59,227,255,.45)">LM</div>' +
-    '<div><div class="h-sm" style="font-size:52px">Lea M., 32</div><div class="small" style="display:flex;align-items:center;gap:12px;margin-top:6px">' +
-    icon('battery-charging', 34, 'var(--mint)', 2) + 'Projektleiterin · Batteriespeicher</div></div>';
+  prof.innerHTML = '<div style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#3be3ff,#8b6cff);display:flex;align-items:center;justify-content:center;font:800 46px var(--display);box-shadow:0 0 40px rgba(59,227,255,.45)">L</div>' +
+    '<div><div class="h-sm" style="font-size:52px">Luca, 32</div><div class="small" style="display:flex;align-items:center;gap:12px;margin-top:6px">' +
+    icon('battery-charging', 34, 'var(--mint)', 2) + 'Projektleitung · Energiespeicher</div></div>';
   revealUp(tl, prof.children, S.cue('s1a', ['leite', 'projekte']) - .2, { stagger: .12 });
   sfx(S.cue('s1a', ['leite']), 'blip', .45);
 
@@ -129,7 +129,7 @@ function S01(tl, S) {
   const pinsEls = [
     ...pin(pLi, 'Lissabon', '06:31 Uhr', -290, 6, tLi, true),
     ...pin(pSe, 'Seoul', '15:31 Uhr', 28, -86, tSe),
-    ...pin(pLe, 'Leipzig', '07:31 Uhr · Lea', 26, -92, tLe),
+    ...pin(pLe, 'Leipzig', '07:31 Uhr · Luca', 26, -92, tLe),
   ];
   drawIn(tl, arc1, tLe + .25, .7, 'power2.out');
   drawIn(tl, arc2, tLe + .45, .9, 'power2.out');

@@ -1,7 +1,8 @@
 // Intro: eingehende Nachricht aus 2040 + Titel
 function S00(tl, S) {
   const root = makeScene('intro');
-  const i1 = S.L('intro1'), i2 = S.L('intro2');
+  // i2 = die Zeile, während der der Titel erscheint
+  const i1 = S.L('intro1'), i2 = S.L('intro3');
   tl.set(root, { autoAlpha: 1 }, 0);
 
   // Signal-Linie
@@ -23,7 +24,7 @@ function S00(tl, S) {
   sfx(1.55, 'blip', .6);
 
   const rows = [
-    ['VON', 'Lea M. · 32 · Projektleiterin Energiespeicher'],
+    ['VON', 'Luca & Zamir · beide 32'],
     ['GESENDET', 'Dienstag, 30.10.2040 · 07:31 Uhr'],
     ['AN', 'Abiturjahrgang 2026'],
   ];
@@ -44,8 +45,8 @@ function S00(tl, S) {
     tl.to(node, { color: '#eef4ff', textShadow: '0 0 0px rgba(65,240,166,0)', duration: .6 }, t + 1.3);
   };
   hl(vals[2], S.cue('intro1', ['jahrgang', '2026']));
-  hl(vals[0], S.cue('intro1', ['lea']));
-  hl(vals[1], S.cue('intro1', ['2040', 'zweitausendvierzig'], .9));
+  hl(vals[0], S.cue('intro1', ['luca'], .8));
+  hl(vals[1], S.cue('intro2', ['2040', 'zweitausendvierzig'], .9));
 
   // große Wellenform in der Karte
   const wv = el('canvas', { attrs: { width: 988, height: 120 }, css: 'position:absolute;left:46px;top:340px;width:988px;height:120px;' }, card);
@@ -55,7 +56,7 @@ function S00(tl, S) {
     wg.clearRect(0, 0, 988, 120);
     const n = 104;
     for (let i = 0; i < n; i++) {
-      const lv = voiceLevel(t - Math.abs(i - n / 2) * .012, 'lea');
+      const lv = voiceLevel(t - Math.abs(i - n / 2) * .012);
       const idle = .05 + .04 * Math.sin(t * 3 + i * .5);
       const h = Math.max(3, (lv * (.6 + .4 * Math.abs(Math.sin(i * 2.31 + t * 9))) + idle) * 104);
       const k = 1 - Math.abs(i - n / 2) / (n / 2);

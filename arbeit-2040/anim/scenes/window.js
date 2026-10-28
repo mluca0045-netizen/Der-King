@@ -1,4 +1,4 @@
-// Illustration: Blick aus Leas Fenster im Jahr 2040 (Morgen- oder Abendstimmung).
+// Illustration: Blick aus Lucas Fenster im Jahr 2040 (Morgen- oder Abendstimmung).
 // Liefert Handles für GSAP und registriert die Dauerbewegungen (Windräder, Drohnen, Bahn, Dampf).
 function buildWindow(root, o = {}) {
   const dusk = !!o.dusk;
