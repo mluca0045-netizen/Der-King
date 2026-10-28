@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Arbeit 4.0 – Eine Nachricht aus dem Jahr 2040</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="bg" width="1920" height="1080"></canvas>
+  <canvas id="fx" width="1920" height="1080"></canvas>
+  <div id="scenes"></div>
+  <div id="hud">
+    <div id="hud-chapter"><span class="num"></span><span class="title"></span></div>
+    <div id="hud-mode" class="chip"></div>
+    <div id="hud-msg"><span class="rec"></span><span class="lbl">Nachricht von Lea · 30.10.2040</span><canvas id="wave" width="300" height="44"></canvas></div>
+    <div id="hud-src"></div>
+    <div id="hud-progress"><div class="bar"></div></div>
+  </div>
+  <div id="vignette"></div>
+  <canvas id="grain" width="960" height="540"></canvas>
+  <div id="flash"></div>
+</div>
+<script src="../node_modules/gsap/dist/gsap.min.js"></script>
+<script src="../node_modules/gsap/dist/SplitText.min.js"></script>
+<script src="../node_modules/gsap/dist/DrawSVGPlugin.min.js"></script>
+<script src="../node_modules/gsap/dist/CustomEase.min.js"></script>
+<script src="../node_modules/gsap/dist/ScrambleTextPlugin.min.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/world.js"></script>
+<script src="../build/timeline.js"></script>
+<script src="lib.js"></script>
+<script src="bg.js"></script>
+<script src="scenes/window.js"></script>
+<script src="scenes/s00_intro.js"></script>
+<script src="scenes/s01_2040.js"></script>
+<script src="scenes/s02_history.js"></script>
+<script src="scenes/s03_jobs.js"></script>
+<script src="scenes/s04_place.js"></script>
+<script src="scenes/s05_market.js"></script>
+<script src="scenes/s06_private.js"></script>
+<script src="scenes/s07_career.js"></script>
+<script src="scenes/s08_wealth.js"></script>
+<script src="scenes/s09_rich.js"></script>
+<script src="scenes/s10_outro.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

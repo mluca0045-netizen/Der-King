@@ -1,0 +1,18 @@
+{
+  "name": "arbeit-2040",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Animiertes Erklärvideo „Arbeit 4.0 – Eine Nachricht aus dem Jahr 2040“ (HTML/GSAP, Bild-für-Bild gerendert)",
+  "scripts": {
+    "assets": "node anim/build-assets.js",
+    "render": "node render/render.js --workers 3",
+    "preview": "node render/preview.js build 0 30 60"
+  },
+  "dependencies": {
+    "d3-geo": "^3.1.1",
+    "gsap": "^3.13.0",
+    "lucide-static": "^0.468.0",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  }
+}
